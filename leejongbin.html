@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>근로자 휴먼 에러 & 심리 체크리스트 (Human Factor)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons (for beautiful interface) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Pretendard', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+
+    <!-- Header Section -->
+    <header class="bg-gradient-to-r from-amber-500 to-red-600 text-white shadow-lg">
+        <div class="max-w-6xl mx-auto px-4 py-6 md:py-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <span class="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                        TBM (작업 전 회의) 필수 도구
+                    </span>
+                    <h1 class="text-2xl md:text-3xl font-extrabold mt-2 flex items-center gap-2">
+                        <i data-lucide="brain-circuit" class="w-8 h-8"></i>
+                        근로자 휴먼 에러 & 심리 체크 (Human Factor)
+                    </h1>
+                    <p class="text-amber-100 mt-1 text-sm md:text-base">
+                        현장 사고의 80%는 방심과 피로에서 옵니다. 직관적인 스캔으로 오늘 아침의 위험을 예방하세요.
+                    </p>
+                </div>
+                <div class="bg-black/20 p-3 rounded-lg text-sm flex items-center gap-3 w-full md:w-auto">
+                    <i data-lucide="calendar" class="text-amber-300 w-5 h-5 flex-shrink-0"></i>
+                    <div>
+                        <div class="font-medium">점검 일자</div>
+                        <div id="current-date" class="text-amber-200 font-bold">2026. 07. 07 (화)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-8">
+        
+        <!-- 4대 핵심 체크포인트 안내 (가이드 요약) -->
+        <section class="mb-8">
+            <h2 class="text-lg font-bold text-slate-700 mb-4 flex items-center gap-2">
+                <i data-lucide="info" class="text-blue-500 w-5 h-5"></i>
+                오늘 아침 TBM 필수 관찰 가이드
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- 카드 1 -->
+                <div class="bg-white p-4 rounded-xl border-l-4 border-red-500 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-start gap-3">
+                        <div class="p-2 bg-red-50 text-red-500 rounded-lg">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-sm">눈빛·표정 스캔</h3>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">피곤하거나 멍한 표정, 감정 기복이 심한 근로자 집중 관리 (집중력 저하 사고 1순위)</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 카드 2 -->
+                <div class="bg-white p-4 rounded-xl border-l-4 border-amber-500 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-start gap-3">
+                        <div class="p-2 bg-amber-50 text-amber-500 rounded-lg">
+                            <i data-lucide="shield-alert" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-sm">"원래 하던 대로" 증후군</h3>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">"내가 10년 넘게 했어"라며 안전 조치를 귀찮아하는 베테랑의 과신 방지</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 카드 3 -->
+                <div class="bg-white p-4 rounded-xl border-l-4 border-yellow-500 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-start gap-3">
+                        <div class="p-2 bg-yellow-50 text-yellow-500 rounded-lg">
+                            <i data-lucide="smartphone-off" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-sm">스마트폰 좀비 방지</h3>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">이동 중이거나 장비 선회 반경 내에서 스마트폰을 보며 보행하는 행동 차단</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 카드 4 -->
+                <div class="bg-white p-4 rounded-xl border-l-4 border-blue-500 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-start gap-3">
+                        <div class="p-2 bg-blue-50 text-blue-500 rounded-lg">
+                            <i data-lucide="users-round" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-sm">신규 및 외국인 전담</h3>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">오늘 처음 온 근로자나 한국어가 서툰 외국인에게 멘토(소통 가이드) 지정 필수</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Left: 근로자 등록 및 입력 폼 -->
+            <div class="lg:col-span-1 space-y-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <h2 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                        <i data-lucide="user-plus" class="text-amber-500"></i>
+                        스캔 대상 근로자 등록
+                    </h2>
+                    
+                    <form id="worker-form" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">근로자 성명</label>
+                            <input type="text" id="worker-name" required placeholder="예: 홍길동, 김철수" 
+                                class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">공정/작업구분</label>
+                                <select id="worker-role" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm">
+                                    <option value="비계공">비계공</option>
+                                    <option value="철근공">철근공</option>
+                                    <option value="형틀목공">형틀목공</option>
+                                    <option value="콘크리트공">콘크리트공</option>
+                                    <option value="장비조종원">장비조종원</option>
+                                    <option value="일반인부">일반인부</option>
+                                    <option value="기타">기타</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">근무 형태</label>
+                                <select id="worker-type" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm">
+                                    <option value="일반">일반 근로자</option>
+                                    <option value="베테랑">베테랑 (10년+)</option>
+                                    <option value="신규">신규 입사자</option>
+                                    <option value="외국인">외국인 근로자</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-100 pt-4">
+                            <span class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">심리 및 행동 상태 스캔 (중복 체크 가능)</span>
+                            
+                            <div class="space-y-3">
+                                <!-- 항목 1 -->
+                                <label class="flex items-start gap-3 p-2 rounded-lg hover:bg-red-50/50 cursor-pointer transition-colors border border-transparent hover:border-red-100">
+                                    <input type="checkbox" id="factor-fatigue" class="mt-1 w-4 h-4 text-red-600 border-slate-300 rounded focus:ring-red-500">
+                                    <div>
+                                        <span class="text-sm font-semibold text-red-700 block">눈빛 및 표정 이상</span>
+                                        <span class="text-xs text-slate-500 block leading-tight">피로, 멍함, 감정 기복, 무표정 또는 어두운 낯빛</span>
+                                    </div>
+                                </label>
+
+                                <!-- 항목 2 -->
+                                <label class="flex items-start gap-3 p-2 rounded-lg hover:bg-amber-50/50 cursor-pointer transition-colors border border-transparent hover:border-amber-100">
+                                    <input type="checkbox" id="factor-overconfidence" class="mt-1 w-4 h-4 text-amber-600 border-slate-300 rounded focus:ring-amber-500">
+                                    <div>
+                                        <span class="text-sm font-semibold text-amber-700 block">"원래 하던 대로" (과신)</span>
+                                        <span class="text-xs text-slate-500 block leading-tight">안전수칙 생략, 고리 체결 귀찮아함, 고집 성향</span>
+                                    </div>
+                                </label>
+
+                                <!-- 항목 3 -->
+                                <label class="flex items-start gap-3 p-2 rounded-lg hover:bg-yellow-50/50 cursor-pointer transition-colors border border-transparent hover:border-yellow-100">
+                                    <input type="checkbox" id="factor-smartphone" class="mt-1 w-4 h-4 text-yellow-600 border-slate-300 rounded focus:ring-yellow-500">
+                                    <div>
+                                        <span class="text-sm font-semibold text-yellow-700 block">스마트폰 위험 사용</span>
+                                        <span class="text-xs text-slate-500 block leading-tight">이동 중 시선 고정, 위험 구역 내 폰 주시</span>
+                                    </div>
+                                </label>
+
+                                <!-- 항목 4 -->
+                                <label class="flex items-start gap-3 p-2 rounded-lg hover:bg-blue-50/50 cursor-pointer transition-colors border border-transparent hover:border-blue-100">
+                                    <input type="checkbox" id="factor-no-mentor" class="mt-1 w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500">
+                                    <div>
+                                        <span class="text-sm font-semibold text-blue-700 block">소통 및 멘토 미지정</span>
+                                        <span class="text-xs text-slate-500 block leading-tight">신규/외국인 중 소통 전담 가이드(멘토)가 없는 상태</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full bg-gradient-to-r from-amber-500 to-red-600 text-white font-bold py-3 px-4 rounded-xl hover:from-amber-600 hover:to-red-700 shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                            <i data-lucide="user-check"></i>
+                            TBM 점검 리스트 등록
+                        </button>
+                    </form>
+                </div>
+
+                <!-- 통계 및 요약 -->
+                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+                    <h3 class="text-sm font-bold text-slate-700 mb-3">금일 휴먼 에러 요약</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-red-50 p-3 rounded-xl border border-red-100">
+                            <div class="text-xs font-semibold text-red-600">고위험 근로자</div>
+                            <div id="high-risk-count" class="text-2xl font-black text-red-700 mt-1">0명</div>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                            <div class="text-xs font-semibold text-slate-500">총 점검 인원</div>
+                            <div id="total-count" class="text-2xl font-black text-slate-700 mt-1">0명</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: 실시간 점검 현황 테이블 및 모니터링 -->
+            <div class="lg:col-span-2 space-y-6">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-6 border-b border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                            <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                                <i data-lucide="clipboard-list" class="text-red-500"></i>
+                                TBM 현장 스캔 및 모니터링 보드
+                            </h2>
+                            <p class="text-xs text-slate-500 mt-1">
+                                빨간색 표시 근로자는 즉시 특별 관리(상담/주의 환기/멘토 지정)가 필요합니다.
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-2 w-full sm:w-auto">
+                            <select id="filter-risk" class="w-full sm:w-auto px-3 py-1.5 border border-slate-300 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-amber-500">
+                                <option value="all">전체 상태 보기</option>
+                                <option value="high">고위험군만 보기 (2개 이상)</option>
+                                <option value="warning">주의군만 보기 (1개)</option>
+                                <option value="safe">정상 상태만 보기 (0개)</option>
+                            </select>
+                            <button id="clear-all" class="text-xs border border-slate-300 hover:bg-slate-50 text-slate-600 px-3 py-1.5 rounded-lg flex items-center gap-1 font-medium transition-colors">
+                                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                                전체 초기화
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 실시간 데이터 테이블 -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50 text-slate-500 text-xs font-bold uppercase border-b border-slate-200">
+                                    <th class="py-3.5 px-6">근로자 / 역할</th>
+                                    <th class="py-3.5 px-6">스캔 항목 체크 상태</th>
+                                    <th class="py-3.5 px-6">위험 등급</th>
+                                    <th class="py-3.5 px-6 text-center">조치 및 모니터링</th>
+                                </tr>
+                            </thead>
+                            <tbody id="worker-table-body" class="divide-y divide-slate-100 text-sm">
+                                <!-- 자바스크립트로 동적 렌더링 -->
+                                <tr id="no-data-row">
+                                    <td colspan="4" class="py-12 px-6 text-center text-slate-400">
+                                        <div class="flex flex-col items-center justify-center gap-2">
+                                            <i data-lucide="folder-open" class="w-12 h-12 text-slate-300"></i>
+                                            <span class="font-medium">등록된 TBM 점검 대상자가 없습니다.</span>
+                                            <span class="text-xs text-slate-400">왼쪽 폼에서 근로자를 등록하고 스캔을 시작하세요.</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 아침 TBM 특별 안전 수칙 안내판 -->
+                <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6">
+                    <h3 class="text-base font-bold text-amber-900 flex items-center gap-2 mb-3">
+                        <i data-lucide="megaphone" class="text-amber-600"></i>
+                        휴먼 에러 위험자 대상 즉각 조치 가이드
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-amber-800">
+                        <div class="space-y-2">
+                            <div class="flex items-start gap-2">
+                                <span class="bg-amber-200 text-amber-900 px-1.5 py-0.5 rounded text-[10px] font-bold mt-0.5">조치 1</span>
+                                <p><strong>눈빛 무표정/피로 의심자:</strong> 즉시 시원한 음료를 제공하고, 가벼운 대화를 유도해 인지력을 점검하세요. 필요시 오전에는 고소 작업 및 기계 조종 등 고위험 공정에서 일시 제외합니다.</p>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="bg-amber-200 text-amber-900 px-1.5 py-0.5 rounded text-[10px] font-bold mt-0.5">조치 2</span>
+                                <p><strong>"원래 하던 대로" 베테랑:</strong> 권위를 무시하기보다는 "팀장님이 솔선수범하셔야 젊은 친구들이 안전 고리를 겁니다"라며 책임감과 모범을 정중히 유도하세요.</p>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex items-start gap-2">
+                                <span class="bg-amber-200 text-amber-900 px-1.5 py-0.5 rounded text-[10px] font-bold mt-0.5">조치 3</span>
+                                <p><strong>스마트폰 밀착 마크:</strong> 위험 기계 반경 내 보행 시 반드시 경고하고, TBM 시간 및 이동 구간에선 스마트폰을 주머니에 넣도록 강력히 약조를 받습니다.</p>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="bg-amber-200 text-amber-900 px-1.5 py-0.5 rounded text-[10px] font-bold mt-0.5">조치 4</span>
+                                <p><strong>신규·외국인 근로자:</strong> 1:1 '소통 가이드(멘토)'가 지정되지 않았다면 해당 반의 최고참급 또는 언어 소통이 가능한 한국인 관리자를 반드시 매칭한 후 작업을 지시하세요.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Custom Modal for Alerts (To avoid default alert()) -->
+    <div id="modal-backdrop" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl p-6 transform scale-95 opacity-0 transition-all duration-300" id="modal-content">
+            <div class="flex items-center gap-3 text-red-600 mb-4">
+                <i data-lucide="alert-triangle" class="w-8 h-8 flex-shrink-0"></i>
+                <h3 class="text-xl font-bold" id="modal-title">경고</h3>
+            </div>
+            <p class="text-slate-600 text-sm mb-6" id="modal-message">모달 메시지 내용이 들어갑니다.</p>
+            <div class="flex justify-end gap-3">
+                <button id="modal-close-btn" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-4 py-2 rounded-lg text-sm transition-colors">
+                    닫기
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript For Interaction and Logic -->
+    <script>
+        // 초기 샘플 데이터
+        let workers = [
+            { id: 1, name: '이민수', role: '비계공', type: '베테랑', factors: { fatigue: true, overconfidence: true, smartphone: false, noMentor: false }, date: '2026. 07. 07' },
+            { id: 2, name: '타티안', role: '형틀목공', type: '외국인', factors: { fatigue: false, overconfidence: false, smartphone: false, noMentor: true }, date: '2026. 07. 07' },
+            { id: 3, name: '박준혁', role: '철근공', type: '신규', factors: { fatigue: true, overconfidence: false, smartphone: true, noMentor: false }, date: '2026. 07. 07' },
+            { id: 4, name: '정태호', role: '장비조종원', type: '일반', factors: { fatigue: false, overconfidence: false, smartphone: false, noMentor: false }, date: '2026. 07. 07' }
+        ];
+
+        // DOM 요소 로드
+        const workerForm = document.getElementById('worker-form');
+        const workerNameInput = document.getElementById('worker-name');
+        const workerRoleSelect = document.getElementById('worker-role');
+        const workerTypeSelect = document.getElementById('worker-type');
+        
+        const checkFatigue = document.getElementById('factor-fatigue');
+        const checkOverconfidence = document.getElementById('factor-overconfidence');
+        const checkSmartphone = document.getElementById('factor-smartphone');
+        const checkNoMentor = document.getElementById('factor-no-mentor');
+
+        const workerTableBody = document.getElementById('worker-table-body');
+        const totalCountEl = document.getElementById('total-count');
+        const highRiskCountEl = document.getElementById('high-risk-count');
+        const filterRiskSelect = document.getElementById('filter-risk');
+        const clearAllBtn = document.getElementById('clear-all');
+
+        // 커스텀 모달 요소
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const modalContent = document.getElementById('modal-content');
+        const modalTitle = document.getElementById('modal-title');
+        const modalMessage = document.getElementById('modal-message');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+
+        // 오늘 날짜 표시 (실제 2026년 날짜)
+        const dateElement = document.getElementById('current-date');
+        const today = new Date();
+        const days = ['일', '월', '화', '수', '목', '금', '토'];
+        dateElement.textContent = `${today.getFullYear()}. ${String(today.getMonth() + 1).padStart(2, '0')}. ${String(today.getDate()).padStart(2, '0')} (${days[today.getDay()]})`;
+
+        // 모달 팝업 함수
+        function showAlert(title, message) {
+            modalTitle.textContent = title;
+            modalMessage.innerHTML = message;
+            modalBackdrop.classList.remove('hidden');
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        // 모달 닫기
+        function closeModal() {
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modalBackdrop.classList.add('hidden');
+            }, 200);
+        }
+
+        modalCloseBtn.addEventListener('click', closeModal);
+        modalBackdrop.addEventListener('click', (e) => {
+            if (e.target === modalBackdrop) closeModal();
+        });
+
+        // 위험 요소 개수 계산
+        function getRiskCount(factors) {
+            return Object.values(factors).filter(v => v).length;
+        }
+
+        // 위험 단계 파악
+        function getRiskLevel(count) {
+            if (count >= 2) return { text: '고위험 (상담/조치)', color: 'bg-red-100 text-red-800 border-red-200', dot: 'bg-red-500' };
+            if (count === 1) return { text: '주의 (밀착 모니터)', color: 'bg-amber-100 text-amber-800 border-amber-200', dot: 'bg-amber-500' };
+            return { text: '정상 (작업 가능)', color: 'bg-emerald-100 text-emerald-800 border-emerald-200', dot: 'bg-emerald-500' };
+        }
+
+        // 가이드 메시지 반환
+        function getActionAdvice(worker) {
+            const adviceList = [];
+            if (worker.factors.fatigue) adviceList.push("😴 <strong>피로 이상:</strong> 오늘 하루 위험 기계 및 위험 고소 작업 임시 제외 권장.");
+            if (worker.factors.overconfidence) adviceList.push("🏗️ <strong>과신 성향:</strong> 팀원들 모범을 위한 특별 서약(고리 체결) 유도.");
+            if (worker.factors.smartphone) adviceList.push("📱 <strong>스마트폰 집중:</strong> 현장 스마트폰 파우치 보관 또는 보행 중 보지 않기 특별 경고.");
+            if (worker.factors.noMentor) adviceList.push("🤝 <strong>멘토 공백:</strong> 베테랑 1:1 멘토 즉각 지정 필요.");
+            
+            return adviceList.length > 0 ? adviceList.join("<br>") : "✅ <strong>정상:</strong> 사전 준비 체조 완료 및 정상 작업 가능 상태.";
+        }
+
+        // 렌더링 함수
+        function renderWorkers() {
+            const filter = filterRiskSelect.value;
+            const filteredWorkers = workers.filter(w => {
+                const count = getRiskCount(w.factors);
+                if (filter === 'high') return count >= 2;
+                if (filter === 'warning') return count === 1;
+                if (filter === 'safe') return count === 0;
+                return true;
+            });
+
+            // 빈 상태 처리
+            if (filteredWorkers.length === 0) {
+                workerTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="py-12 px-6 text-center text-slate-400">
+                            <div class="flex flex-col items-center justify-center gap-2">
+                                <i data-lucide="filter" class="w-10 h-10 text-slate-300"></i>
+                                <span class="font-medium">필터링된 결과가 없습니다.</span>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            workerTableBody.innerHTML = '';
+            
+            filteredWorkers.forEach(w => {
+                const riskCount = getRiskCount(w.factors);
+                const riskLevel = getRiskLevel(riskCount);
+                
+                const tr = document.createElement('tr');
+                tr.className = `hover:bg-slate-50 transition-colors ${riskCount >= 2 ? 'bg-red-50/20' : ''}`;
+                
+                // 근무형태 뱃지
+                let typeBadge = '';
+                if (w.type === '베테랑') typeBadge = '<span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-1.5 py-0.5 rounded">경력10년+</span>';
+                else if (w.type === '신규') typeBadge = '<span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-1.5 py-0.5 rounded">신규입사</span>';
+                else if (w.type === '외국인') typeBadge = '<span class="bg-purple-100 text-purple-800 text-[10px] font-bold px-1.5 py-0.5 rounded">외국인</span>';
+                else typeBadge = '<span class="bg-slate-100 text-slate-600 text-[10px] font-bold px-1.5 py-0.5 rounded">일반</span>';
+
+                // 4대 체크 상태 표시
+                const checksHtml = `
+                    <div class="flex flex-wrap gap-1.5 max-w-xs">
+                        <span class="px-2 py-0.5 rounded text-[11px] font-medium ${w.factors.fatigue ? 'bg-red-100 text-red-700' : 'bg-slate-100 text-slate-400'}" title="눈빛/표정 이상">
+                            눈빛·표정 ${w.factors.fatigue ? '🚨' : '✓'}
+                        </span>
+                        <span class="px-2 py-0.5 rounded text-[11px] font-medium ${w.factors.overconfidence ? 'bg-amber-100 text-amber-700' : 'bg-slate-100 text-slate-400'}" title="원래 하던 대로 증후군">
+                            과신 ${w.factors.overconfidence ? '🚨' : '✓'}
+                        </span>
+                        <span class="px-2 py-0.5 rounded text-[11px] font-medium ${w.factors.smartphone ? 'bg-yellow-100 text-yellow-700' : 'bg-slate-100 text-slate-400'}" title="스마트폰 좀비">
+                            폰 ${w.factors.smartphone ? '🚨' : '✓'}
+                        </span>
+                        <span class="px-2 py-0.5 rounded text-[11px] font-medium ${w.factors.noMentor ? 'bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-400'}" title="멘토 부재">
+                            멘토 ${w.factors.noMentor ? '🚨' : '✓'}
+                        </span>
+                    </div>
+                `;
+
+                tr.innerHTML = `
+                    <td class="py-4 px-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-600 text-sm border-2 ${riskCount >= 2 ? 'border-red-300' : 'border-slate-200'}">
+                                ${w.name.charAt(0)}
+                            </div>
+                            <div>
+                                <div class="font-bold text-slate-800 flex items-center gap-1.5">
+                                    ${w.name}
+                                    ${typeBadge}
+                                </div>
+                                <div class="text-xs text-slate-500">${w.role}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="py-4 px-6">
+                        ${checksHtml}
+                    </td>
+                    <td class="py-4 px-6">
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold border ${riskLevel.color}">
+                            <span class="w-2 h-2 rounded-full ${riskLevel.dot}"></span>
+                            ${riskLevel.text}
+                        </span>
+                    </td>
+                    <td class="py-4 px-6 text-center">
+                        <div class="flex items-center justify-center gap-2">
+                            <button onclick="viewAdvice(${w.id})" class="px-3 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-bold flex items-center gap-1 transition-colors">
+                                <i data-lucide="sparkles" class="w-3 h-3 text-amber-600"></i> 조치 조언
+                            </button>
+                            <button onclick="deleteWorker(${w.id})" class="p-1.5 hover:bg-red-50 text-red-500 rounded-lg transition-colors" title="삭제">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                workerTableBody.appendChild(tr);
+            });
+
+            // 통계 수치 업데이트
+            updateStats();
+            // Lucide 아이콘 재생성
+            lucide.createIcons();
+        }
+
+        // 통계 갱신
+        function updateStats() {
+            totalCountEl.textContent = `${workers.length}명`;
+            const highRiskCount = workers.filter(w => getRiskCount(w.factors) >= 2).length;
+            highRiskCountEl.textContent = `${highRiskCount}명`;
+            
+            // 위험 인원이 생기면 텍스트 강조 처리
+            if (highRiskCount > 0) {
+                highRiskCountEl.className = "text-2xl font-black text-red-700 mt-1 animate-pulse";
+            } else {
+                highRiskCountEl.className = "text-2xl font-black text-slate-700 mt-1";
+            }
+        }
+
+        // 1:1 가이드 팝업
+        window.viewAdvice = function(id) {
+            const worker = workers.find(w => w.id === id);
+            if (!worker) return;
+            
+            const riskCount = getRiskCount(worker.factors);
+            const statusClass = riskCount >= 2 ? 'text-red-600' : (riskCount === 1 ? 'text-amber-600' : 'text-emerald-600');
+            
+            const content = `
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2 bg-slate-50 p-3 rounded-xl border border-slate-200">
+                        <div class="text-sm">
+                            <strong>성명:</strong> ${worker.name} (${worker.role} / ${worker.type})
+                        </div>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">인간 행동학적 요인 분석</span>
+                        <div class="space-y-2 text-sm text-slate-700">
+                            ${getActionAdvice(worker)}
+                        </div>
+                    </div>
+                    <div class="border-t border-slate-100 pt-3 mt-3">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2">관리책임자 행동 지침</span>
+                        <div class="p-3 bg-slate-50 rounded-lg text-xs leading-relaxed text-slate-600">
+                            "현장에서의 휴먼 에러는 비난하기보다 예방을 위한 소통을 선행하는 것이 효율적입니다. 안전을 위해 약속된 가이드를 이행하도록 유도해 주세요."
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            showAlert(`[${worker.name}] 소통 및 안전 솔루션`, content);
+        };
+
+        // 근로자 삭제
+        window.deleteWorker = function(id) {
+            workers = workers.filter(w => w.id !== id);
+            renderWorkers();
+        };
+
+        // 전체 초기화
+        clearAllBtn.addEventListener('click', () => {
+            if (confirm("정말로 오늘 아침의 점검 내역을 전부 초기화하시겠습니까?")) {
+                workers = [];
+                renderWorkers();
+            }
+        });
+
+        // 근로자 등록 이벤트
+        workerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const name = workerNameInput.value.trim();
+            const role = workerRoleSelect.value;
+            const type = workerTypeSelect.value;
+
+            const factors = {
+                fatigue: checkFatigue.checked,
+                overconfidence: checkOverconfidence.checked,
+                smartphone: checkSmartphone.checked,
+                noMentor: checkNoMentor.checked
+            };
+
+            const newWorker = {
+                id: Date.now(),
+                name,
+                role,
+                type,
+                factors,
+                date: '2026. 07. 07'
+            };
+
+            // 점검 내역 추가
+            workers.unshift(newWorker);
+            renderWorkers();
+
+            // 폼 초기화 및 이전 입력 방지
+            workerForm.reset();
+
+            // 고위험군 즉각 경고 (체크 항목이 2개 이상인 경우)
+            const count = getRiskCount(factors);
+            if (count >= 2) {
+                showAlert(
+                    "⚠️ 고위험 에러 관리 대상 감지!", 
+                    `방금 등록된 <strong>${name}</strong> 근로자는 스캔 항목 중 <strong>${count}개 이상</strong>에서 피로 또는 에러 징후가 확인되었습니다.<br><br>안전 가이드에 맞추어 현장 투입 전 1:1 면담을 권장합니다.`
+                );
+            }
+        });
+
+        // 필터 변경 시 리렌더링
+        filterRiskSelect.addEventListener('change', renderWorkers);
+
+        // 초기 화면 설정
+        window.onload = function() {
+            renderWorkers();
+        };
+    </script>
+</body>
+</html>

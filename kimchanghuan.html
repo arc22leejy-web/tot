@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>용접·용단 화재 예방 안전보건센터 - 사고사례 7번 집중분석</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316', // 안전 오렌지
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        },
+                        accent: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e', // 합격 그린
+                            600: '#16a34a',
+                        },
+                        danger: {
+                            50: '#fef2f2',
+                            100: '#fee2e2',
+                            500: '#ef4444', // 위험 레드
+                            600: '#dc2626',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans KR', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            background-color: #fafafa;
+        }
+        .custom-shadow {
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 4px 12px -2px rgba(0, 0, 0, 0.02);
+        }
+        .active-tab {
+            background-color: #ffedd5;
+            border-left-color: #f97316;
+            color: #ea580c;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased leading-relaxed">
+
+    <!-- 상단 헤더 내비게이션 -->
+    <header class="sticky top-0 z-50 glass border-b border-gray-100 custom-shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-brand-500 text-white p-2.5 rounded-xl shadow-md shadow-brand-500/20 animate-pulse">
+                    <i class="fa-solid fa-fire-extinguisher text-xl"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold text-brand-600 tracking-wider uppercase block">용단작업 화재예방 교육관</span>
+                    <h1 class="text-lg font-black text-gray-900 tracking-tight">안전원-CASE 07</h1>
+                </div>
+            </div>
+            <nav class="hidden md:flex space-x-1">
+                <a href="#case-overview" class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-500 hover:bg-orange-50 rounded-lg transition-all">사고 개요</a>
+                <a href="#interactive-checklist" class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-500 hover:bg-orange-50 rounded-lg transition-all">8대 점검 체크리스트</a>
+                <a href="#self-evaluation" class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-brand-500 hover:bg-orange-50 rounded-lg transition-all">자율 안전 진단</a>
+            </nav>
+            <div>
+                <a href="#self-evaluation" class="bg-brand-500 hover:bg-brand-600 text-white px-4 py-2 rounded-xl text-sm font-bold shadow-lg shadow-brand-500/10 hover:shadow-brand-500/25 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-clipboard-check"></i> 자율점검 시작
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 밝고 역동적인 메인 비주얼 히어로 섹션 -->
+    <section class="relative bg-gradient-to-b from-orange-50 via-white to-transparent py-16 sm:py-24 overflow-hidden">
+        <div class="absolute inset-0 z-0 opacity-40">
+            <svg class="absolute right-0 top-0 h-full w-1/2 text-orange-100" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                <polygon points="50,0 100,0 100,100 100,100" />
+            </svg>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 bg-brand-100 text-brand-800 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
+                        <span class="w-2 h-2 rounded-full bg-brand-500 animate-ping"></span>
+                        건물 내부 철거 용단작업 화재 집중분석
+                    </div>
+                    <h2 class="text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-tight leading-[1.15]">
+                        용단 불티 차단이<br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-amber-600">안전한 일터의 시작</span>입니다.
+                    </h2>
+                    <p class="text-base sm:text-lg text-gray-600 max-w-2xl font-light">
+                        2017년 경기도 화성시 쇼핑몰 원상복구 현장에서 발생한 안타까운 사고사례를 분석하여, 다시는 동일한 참사가 재발하지 않도록 핵심 8대 안전 점검 기준과 구체적인 행동 가이드를 제시합니다.
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <div class="flex items-center gap-2 text-sm text-gray-600 bg-white px-4 py-2.5 rounded-xl border border-gray-100 shadow-sm">
+                            <i class="fa-solid fa-user-shield text-brand-500"></i>
+                            <span>사고사망 재해 예방 최우선</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm text-gray-600 bg-white px-4 py-2.5 rounded-xl border border-gray-100 shadow-sm">
+                            <i class="fa-solid fa-fire-extinguisher text-brand-500"></i>
+                            <span>소화설비 완벽 비치</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 메인 히어로 일러스트 -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-full max-w-md bg-white p-6 rounded-3xl custom-shadow border border-gray-100">
+                        <div class="absolute -top-4 -right-4 bg-red-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
+                            경각심 고취
+                        </div>
+                        <h3 class="text-sm font-bold text-gray-400 mb-4 uppercase tracking-wider">용단 화재 메커니즘</h3>
+                        <svg viewBox="0 0 400 300" class="w-full h-auto rounded-2xl bg-orange-50/50 p-4">
+                            <!-- Background Steel grid -->
+                            <line x1="50" y1="50" x2="350" y2="50" stroke="#cbd5e1" stroke-width="4" />
+                            <line x1="100" y1="50" x2="100" y2="250" stroke="#cbd5e1" stroke-width="4" />
+                            <line x1="300" y1="50" x2="300" y2="250" stroke="#cbd5e1" stroke-width="4" />
+                            <!-- Spark generator -->
+                            <circle cx="200" cy="100" r="10" fill="#f97316" />
+                            <path d="M200,100 L180,90 M200,100 L220,110 M200,100 L190,120" stroke="#f97316" stroke-width="3" stroke-linecap="round" />
+                            <!-- Sparks falling down -->
+                            <g class="animate-bounce">
+                                <circle cx="210" cy="140" r="4" fill="#ef4444" />
+                                <circle cx="190" cy="170" r="3" fill="#f97316" />
+                                <circle cx="205" cy="210" r="5" fill="#ef4444" />
+                            </g>
+                            <!-- Flammable Material -->
+                            <rect x="160" y="230" width="80" height="40" rx="6" fill="#ef4444" opacity="0.8" />
+                            <text x="200" y="255" fill="white" font-size="12" font-weight="bold" text-anchor="middle">가연물 (우레탄폼)</text>
+                            <!-- Fire representation -->
+                            <path d="M180,230 Q200,180 220,230 Z" fill="#f97316" opacity="0.9" />
+                            <path d="M190,230 Q200,195 210,230 Z" fill="#facc15" opacity="0.9" />
+                            <!-- Warning Icon -->
+                            <g transform="translate(320, 20)">
+                                <circle cx="15" cy="15" r="15" fill="#ef4444" />
+                                <text x="15" y="21" fill="white" font-size="16" font-weight="bold" text-anchor="middle">!</text>
+                            </g>
+                        </svg>
+                        <p class="text-xs text-gray-500 mt-3 text-center leading-normal">
+                            <strong class="text-red-500">3,000℃</strong>에 육박하는 용단 불티는 최장 <strong class="text-red-500">11m</strong>까지 비산되어 숨겨진 가연물(우레탄폼 등)에 착화됩니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 사고사례 7번 상세 대시보드 -->
+    <section id="case-overview" class="py-16 bg-white border-y border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-brand-600 font-bold text-sm tracking-widest uppercase block mb-2">CASE ANALYSIS</span>
+                <h3 class="text-3xl font-extrabold text-gray-900 tracking-tight">
+                    쇼핑몰 3층 매장 원상복구 화재사고 집중분석
+                </h3>
+                <p class="text-gray-500 mt-2">안타까운 재해의 원인을 정확하게 파악하는 것이 예방의 출발점입니다.</p>
+            </div>
+
+            <!-- 사고 데이터 그리드 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="bg-gradient-to-br from-orange-50 to-amber-50 p-6 rounded-2xl border border-orange-100 shadow-sm flex items-start gap-4">
+                    <div class="bg-brand-500 text-white p-3.5 rounded-xl shadow-md">
+                        <i class="fa-solid fa-calendar-day text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-semibold text-brand-700 block mb-1">발생일시 및 소재지</span>
+                        <strong class="text-gray-900 text-base font-bold block">2017. 02. 04 (토) 11:00경</strong>
+                        <span class="text-sm text-gray-500">경기도 화성시 소재 쇼핑몰 매장</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-red-50 to-orange-50 p-6 rounded-2xl border border-red-100 shadow-sm flex items-start gap-4">
+                    <div class="bg-red-500 text-white p-3.5 rounded-xl shadow-md">
+                        <i class="fa-solid fa-users text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-semibold text-red-700 block mb-1">인명피해 규모</span>
+                        <strong class="text-gray-900 text-base font-bold block">사망 2명 / 부상 8명</strong>
+                        <span class="text-sm text-gray-500">가연성 가스 및 유독성 매연 질식</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-2xl border border-blue-100 shadow-sm flex items-start gap-4">
+                    <div class="bg-blue-500 text-white p-3.5 rounded-xl shadow-md">
+                        <i class="fa-solid fa-trowel-bricks text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-semibold text-blue-700 block mb-1">작업 형태 및 규모</span>
+                        <strong class="text-gray-900 text-base font-bold block">원상복구 철거 용단 작업</strong>
+                        <span class="text-sm text-gray-500">쇼핑몰 3층 내부 1,414㎡ 구간</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 사고 경위 & 대책 상세 레이아웃 -->
+            <div class="bg-slate-50 rounded-3xl p-6 sm:p-10 border border-slate-100">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+                    
+                    <!-- 사고 개요 및 상황 원인 -->
+                    <div class="space-y-6 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-2 text-red-600 font-bold mb-3 text-lg">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                <span>재해 원인 및 개요</span>
+                            </div>
+                            <div class="prose text-gray-600 space-y-4">
+                                <p class="leading-relaxed text-sm sm:text-base">
+                                    운영 종료된 매장 내 <strong class="text-gray-900">남아있던 인테리어 시설물 철거작업</strong> 중 산소 및 가스를 사용한 고온 용단작업을 전개하였습니다.
+                                </p>
+                                <p class="leading-relaxed text-sm sm:text-base">
+                                    당시 건물 창호는 내부 인테리어 및 가설 칸막이로 철저히 폐쇄되어 <strong class="text-red-600">통풍이나 환기가 지극히 불충분한 상태</strong>였습니다. 
+                                </p>
+                                <p class="leading-relaxed text-sm sm:text-base">
+                                    이러한 밀폐 공간에서 용단 작업 시 비산된 초고온 불티가 주변에 정리되지 않고 방치되어 있던 <strong class="text-red-600 font-semibold">스티로폼, 우레탄폼 등 가연성 단열 자재</strong>에 튀어 순식간에 착화되었으며, 다량의 유독가스가 발생해 차단된 공간 내부에서 대피하지 못해 인명피해가 확대되었습니다.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="bg-red-50 p-4 rounded-xl border border-red-100 text-xs text-red-800">
+                            <strong>주요 기인물:</strong> 우레탄폼 등 가연성 스티로폼 단열재, 산소-LPG 용단 불티
+                        </div>
+                    </div>
+
+                    <!-- 정부 합동 기술 지침 및 안전 대책 -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200/60 custom-shadow flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-2 text-accent-600 font-bold mb-4 text-lg">
+                                <i class="fa-solid fa-shield-halved"></i>
+                                <span>3대 필수 예방안전 대책</span>
+                            </div>
+                            <ul class="space-y-4 text-sm text-gray-600">
+                                <li class="flex items-start gap-3">
+                                    <span class="bg-accent-100 text-accent-800 w-6 h-6 rounded-full flex items-center justify-center font-bold shrink-0 text-xs mt-0.5">1</span>
+                                    <div>
+                                        <strong class="text-gray-900 block">통풍이 불충분한 실내 용단작업 예방 조치</strong>
+                                        <span>작업계획서를 미리 수립하고 위험물 보관 현황을 사전 파악하여 불티 비산방지막을 의무적으로 설치해야 합니다.</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="bg-accent-100 text-accent-800 w-6 h-6 rounded-full flex items-center justify-center font-bold shrink-0 text-xs mt-0.5">2</span>
+                                    <div>
+                                        <strong class="text-gray-900 block">철저한 사전 화기 사용 금지 및 환경 정리</strong>
+                                        <span>가연물이 깔끔히 정리되거나 완전히 제거되지 않은 화재위험 구간에서는 임의 화기 사용을 원천 금지합니다.</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="bg-accent-100 text-accent-800 w-6 h-6 rounded-full flex items-center justify-center font-bold shrink-0 text-xs mt-0.5">3</span>
+                                    <div>
+                                        <strong class="text-gray-900 block">적격 소화설비 배치 및 작동 상태 확인</strong>
+                                        <span>작업 규모에 알맞은 대용량 가압식 소화기 및 불꽃감지 센서 등을 현장 근거리에 즉시 가용한 상태로 대기시킵니다.</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-100 text-xs text-gray-400 text-right">
+                            출처: 고용노동부 & 안전보건공단 공식 가이드
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8대 안전점검 체크리스트 인터랙티브 가이드 -->
+    <section id="interactive-checklist" class="py-16 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-brand-600 font-bold text-sm tracking-widest uppercase block mb-2">SAFETY STANDARD</span>
+                <h3 class="text-3xl font-extrabold text-gray-900 tracking-tight">
+                    용단 작업 화재 예방 8대 체크리스트
+                </h3>
+                <p class="text-gray-500 mt-2">각 체크리스트 항목을 클릭하여 구체적인 예시 일러스트와 밀착 대응 설명을 확인하세요.</p>
+            </div>
+
+            <!-- 메인 인터랙티브 가이드 레이아웃 -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- 왼쪽 체크리스트 메뉴 선택기 -->
+                <div class="lg:col-span-5 space-y-2">
+                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block px-3 mb-2">체크리스트 메뉴</span>
+                    <div class="space-y-2" id="checklist-menu-container">
+                        <!-- JS로 채워질 메뉴 항목들 -->
+                    </div>
+                </div>
+
+                <!-- 오른쪽 디테일 뷰 영역 -->
+                <div class="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 custom-shadow border border-gray-100 min-h-[580px] transition-all duration-300 relative" id="checklist-detail-box">
+                    <!-- JS에 의해 동적으로 변경되는 디테일 뷰 템플릿 -->
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 자율 점검 안전성 스코어 평가판 -->
+    <section id="self-evaluation" class="py-16 bg-white">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-br from-brand-50 to-orange-100/40 rounded-3xl p-8 border border-brand-100/80 custom-shadow">
+                <div class="text-center max-w-2xl mx-auto mb-8">
+                    <div class="bg-brand-500 text-white w-12 h-12 rounded-2xl flex items-center justify-center text-xl mx-auto shadow-md shadow-brand-500/20 mb-3">
+                        <i class="fa-solid fa-list-check"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900">현장 화재안전 자율 자가점검</h3>
+                    <p class="text-gray-600 text-sm mt-1">
+                        오늘 우리 현장의 용접·용단 작업 준비 상태는 어떠한가요? 자율적으로 평가해 보세요.
+                    </p>
+                </div>
+
+                <!-- 점검 현황 게이지바 -->
+                <div class="bg-white rounded-2xl p-6 border border-brand-100 shadow-sm mb-8">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-sm font-bold text-gray-700">종합 화재안전 지수</span>
+                        <span class="text-lg font-black text-brand-600" id="safety-score-percent">0%</span>
+                    </div>
+                    <div class="w-full bg-gray-100 rounded-full h-4 overflow-hidden">
+                        <div class="bg-brand-500 h-full transition-all duration-500 rounded-full" id="safety-progress-bar" style="width: 0%"></div>
+                    </div>
+                    <div class="flex justify-between items-center mt-3">
+                        <span class="text-xs text-gray-400" id="safety-checked-count">총 8개 항목 중 0개 완료</span>
+                        <span class="text-xs font-bold px-2 py-1 bg-red-100 text-red-800 rounded-md" id="safety-score-label">매우 취약 (조치 필요)</span>
+                    </div>
+                </div>
+
+                <!-- 8대 자율 평가 항목 폼 -->
+                <form id="evaluation-form" class="space-y-4">
+                    <!-- 항목 8개가 동적으로 렌더링 됩니다 -->
+                </form>
+
+                <!-- 복사 및 조치 제안 영역 -->
+                <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-between items-center border-t border-brand-100/60 pt-6">
+                    <div class="text-xs text-gray-500 text-center sm:text-left">
+                        * 모든 점검 결과는 로컬에서 즉시 계산되며 저장되지 않으므로 안심하고 점검하십시오.
+                    </div>
+                    <button type="button" onclick="copyChecklistResult()" class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white px-6 py-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2 transition-all">
+                        <i class="fa-solid fa-copy"></i> 자율점검 보고서 클립보드 복사
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 단추 -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+            <div class="flex justify-center items-center gap-2">
+                <div class="bg-brand-500 text-white p-1.5 rounded-lg">
+                    <i class="fa-solid fa-fire-extinguisher"></i>
+                </div>
+                <strong class="text-white font-bold text-lg">용단작업 화재예방 안전센터</strong>
+            </div>
+            <p class="text-sm max-w-md mx-auto text-slate-400 font-light">
+                본 홈페이지는 고용노동부 및 안전보건공단의 사고사례 7번 공인자료 및 건설재해 현장 예방수칙 내용을 기반으로 기획/제작되었습니다.
+            </p>
+            <div class="text-xs text-slate-500">
+                &copy; 2026 건설 안전 재해 예방 연대. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- 알림 모달 토스트 컴포넌트 -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none bg-slate-900 text-white px-6 py-3 rounded-2xl shadow-xl flex items-center gap-3 border border-slate-700">
+        <span class="text-brand-400 text-lg" id="toast-icon"><i class="fa-solid fa-check"></i></span>
+        <span class="text-sm font-medium" id="toast-message">메시지 내용</span>
+    </div>
+
+    <script>
+        // 사고사례 7번 체크리스트 상세 데이터 정의
+        const checklistData = [
+            {
+                id: 1,
+                title: "용접·용단 불꽃 비산 방지 조치",
+                summary: "절단 또는 용접·용단 작업 시 불꽃 비산방지 시설을 설치하였는가?",
+                icon: "fa-shield-halved",
+                desc: "용접이나 용단 시 온도가 높은 미세 금속 불티가 최대 11m까지 날아가 스티로폼 등의 벽면 단열재 속으로 숨어 들어가 수시간 잠복 후 화재를 일으킵니다.",
+                preventive: "가스 용단 및 고온 용접 작업을 할 때는 무조건 작업 반경 10m 이내에 비산방지막(방화포, 방염 시트)을 빈틈없이 견고하게 가두어 설치하고, 배관 통과 구멍이나 바닥 틈새는 불연 재료로 조밀하게 막아야 합니다.",
+                caseRelation: "쇼핑몰 3층 철거 당시 화재 감시 불꽃 가림막이나 방화포를 설계 또는 배치하지 않아 용단 작업 중 생성된 수천 개의 불꽃이 사방으로 직접 흩어져 가연물에 직격했습니다.",
+                goodExample: "작업 부위를 방화포 전용 차단막으로 꼼꼼하게 에워싸고, 틈새는 실리콘 방화패드로 완벽 밀폐한 모습",
+                badExample: "차단 시설 하나 없이 개방된 허허벌판에서 철재 구조물을 고온으로 절단하여 아래층으로 불꽃이 비처럼 떨어지는 상황",
+                svg: `<svg viewBox="0 0 200 150" class="w-full h-full text-slate-700">
+                    <rect width="200" height="150" fill="#f8fafc" rx="12" />
+                    <!-- Steel Pillar -->
+                    <rect x="30" y="20" width="12" height="110" fill="#94a3b8" />
+                    <rect x="25" y="60" width="30" height="8" fill="#64748b" />
+                    <!-- Welding torch -->
+                    <path d="M120,50 L80,75" stroke="#475569" stroke-width="4" stroke-linecap="round" />
+                    <rect x="115" y="45" width="15" height="10" fill="#e2e8f0" rx="2" />
+                    <!-- Protective Curtain (Good element) -->
+                    <rect x="75" y="10" width="6" height="130" fill="#22c55e" rx="3" />
+                    <text x="78" y="145" fill="#16a34a" font-size="7" font-weight="bold" text-anchor="middle">방화포</text>
+                    <!-- Flame & Spark -->
+                    <circle cx="55" cy="64" r="5" fill="#f97316" />
+                    <!-- Bounce spark representation -->
+                    <path d="M55,64 Q65,55 74,62" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="2,2" fill="none" />
+                    <circle cx="74" cy="62" r="2" fill="#ef4444" />
+                    <text x="140" y="40" fill="#1e293b" font-size="10" font-weight="bold">불티 차단 시각화</text>
+                    <rect x="110" y="90" width="75" height="35" rx="6" fill="#dcfce7" />
+                    <text x="147" y="105" fill="#15803d" font-size="8" font-weight="bold" text-anchor="middle">안전 보장</text>
+                    <text x="147" y="118" fill="#166534" font-size="7" text-anchor="middle">방화포 설치 시 100% 차단</text>
+                </svg>`
+            },
+            {
+                id: 2,
+                title: "작업 장소 소화기 의무 비치",
+                summary: "절단 또는 용접·용단 작업 장소 주변에 적격 소화기가 바로 비치되어 있는가?",
+                icon: "fa-fire-extinguisher",
+                desc: "용단 화재는 착화 직후 최초 1분이 생사를 가릅니다. 현장 5m 이내에 검증된 규격의 가압식 대용량 소화기 비치가 필수적입니다.",
+                preventive: "화기 작업 개시 전, 일하는 사람의 손이 즉시 닿을 수 있는 위치(5m 이내)에 소화기 2대 이상을 세워 두고 압력 게이지가 녹색 정상 범위 내에 있는지 확실하게 눈으로 체크해 둡니다.",
+                caseRelation: "쇼핑몰 화재 당시 원상복구 구역 주변에 가용한 소화기가 전무했거나 소형 소화기만 배치되어 있었고 사용법 숙지가 미흡해 초기 대응 단계에서 완전 진압에 참패하였습니다.",
+                goodExample: "작업 발판 바로 옆 거치대에 압력이 가득 충전된 붉은색 분말 소화기(A,B,C급 대형)가 정자세로 비치되어 있는 현장",
+                badExample: "사무실 한구석에 먼지가 뿌옇게 쌓인 채 호스가 갈라지고 게이지 압력이 빠져 작동 불가능한 소화기가 누워 있는 상태",
+                svg: `<svg viewBox="0 0 200 150" class="w-full h-full">
+                    <rect width="200" height="150" fill="#f8fafc" rx="12" />
+                    <!-- Extinguisher outline -->
+                    <rect x="85" y="40" width="30" height="80" rx="15" fill="#ef4444" />
+                    <rect x="90" y="30" width="20" height="10" fill="#475569" />
+                    <!-- Handle & Nozzle -->
+                    <path d="M95,30 C90,15 80,25 75,35" stroke="#475569" stroke-width="3" fill="none" />
+                    <path d="M105,30 L115,20 M105,33 L120,33" stroke="#475569" stroke-width="4" stroke-linecap="round" />
+                    <!-- Gauge -->
+                    <circle cx="100" cy="55" r="8" fill="white" stroke="#334155" stroke-width="1" />
+                    <line x1="100" y1="55" x2="103" y2="50" stroke="#22c55e" stroke-width="1.5" />
+                    <!-- Safety Pin -->
+                    <circle cx="95" cy="25" r="3" fill="#cbd5e1" stroke="#475569" stroke-width="1" />
+                    <!-- Texts -->
+                    <text x="140" y="55" fill="#1e293b" font-size="10" font-weight="bold">적정 압력 게이지</text>
+                    <text x="140" y="70" fill="#22c55e" font-size="8" font-weight="bold">녹색 범위 유지</text>
+                    <rect x="25" y="90" width="50" height="30" rx="6" fill="#fee2e2" />
+                    <text x="50" y="104" fill="#991b1b" font-size="8" font-weight="bold" text-anchor="middle">5m 이내</text>
+                    <text x="50" y="115" fill="#7f1d1d" font-size="6" text-anchor="middle">반경 내 즉시 가용</text>
+                </svg>`
+            },
+            {
+                id: 3,
+                title: "작업 주변 인화성 가연물 제거",
+                summary: "작업장소 주변에 스티로폼, 우레탄폼, 유류 등 가연성 물질이 완전히 제거되었는가?",
+                icon: "fa-trash-can",
+                desc: "철거 공사 현장 내 우레탄 단열재 조각이나 인화성 페인트, 가스 잔류 캔 등은 고온 불티가 떨어지는 순간 폭발적 화재를 가속시키는 최악의 도화선입니다.",
+                preventive: "화기 작업 반경 10m 이내에 위치한 스티로폼 분진, 폼 잔해, 기름 걸레 등을 전부 청소 및 제거하여 폐기조치하고, 고정된 벽면 가연성 단열재에는 불연성 방화 덮개를 반드시 덮어야 합니다.",
+                caseRelation: "쇼핑몰 매장 원상복구 중, 노출되어 있던 천장 및 보 구조물 벽체의 스티로폼 가연 물질을 사전에 정리하지 않은 채 철거팀이 용단 작업을 감행해 대형 폭발을 야기했습니다.",
+                goodExample: "작업 전에 빗자루와 전용 수거함을 사용해 가연성 가루와 부스러기를 한 톨 없이 깨끗이 빗질하여 청소해 놓은 상태",
+                badExample: "철거 중 찢어진 우레탄폼 조각과 마른 합판 쪼가리들이 어지럽게 발판 발밑에 그대로 널려 있는 상황",
+                svg: `<svg viewBox="0 0 200 150" class="w-full h-full">
+                    <rect width="200" height="150" fill="#f8fafc" rx="12" />
+                    <!-- Hazard Sign -->
+                    <polygon points="100,20 140,90 60,90" fill="#facc15" stroke="#eab308" stroke-width="2" />
+                    <text x="100" y="78" fill="black" font-size="28" font-weight="black" text-anchor="middle">!</text>
+                    <!-- Red diagonal line across garbage -->
+                    <g opacity="0.3">
+                        <circle cx="60" cy="115" r="10" fill="#e2h8f0" />
+                        <rect x="140" y="105" width="15" height="15" fill="#cbd5e1" />
+                    </g>
+                    <!-- Safe clearance distance warning -->
+                    <line x1="20" y1="125" x2="180" y2="125" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,4" />
+                    <text x="100" y="140" fill="#ef4444" font-size="8" font-weight="bold" text-anchor="middle">가연물 이격거리 최소 10m 이상 확보</text>
+                    <text x="100" y="110" fill="#475569" font-size="9" font-weight="bold" text-anchor="middle">우레탄폼 • 스티로폼 완전 청소</text>
+                </svg>`
+            },
+            {
+                id: 4,
+                title: "위험 동시작업 원천 금지",
+                summary: "인화성 물질 취급(도장 등)과 화기 사용 작업이 동시에 수행되고 있지 않은가?",
+                icon: "fa-ban",
+                desc: "한쪽에서 유기용제가 가득 섞인 페인트 도장이나 가스 분무 작업을 하면서 동시에 다른 한쪽에서 용단 불티를 튀기는 것은 현장을 폭탄으로 만드는 행위입니다.",
+                preventive: "공정 일정을 엄밀히 조율해 동일 작업 구간 및 상하 인접 층간에서 화기 작업과 가연성 가스나 화학 도료를 다루는 공정이 같은 시간대에 맞물리지 않도록 원천 스케줄을 차단 조정해야 합니다.",
+                caseRelation: "쇼핑몰 철거 구역 구석진 공간에서 내부 원상복구를 위해 인화성 유기용제가 날리는 도료 마감 공정과 금속 보강재 컷팅 작업이 가설 가림막 사이에서 겹쳐 일어났을 가능성이 있습니다.",
+                goodExample: "오늘은 화기 작업 전용일로 고시하고, 스프레이 도장팀은 공사장 출입을 아예 통제해 단독 공정만 차분히 수행하는 형태",
+                badExample: "철거 용접공 바로 아래에서 마스크를 쓴 도장공들이 우레탄 폼 스프레이를 공중에 난사하며 동시 다발적으로 협소 공간에서 일하는 모습",
+                svg: `<svg viewBox="0 0 200 150" class="w-full h-full">
+                    <rect width="200" height="150" fill="#f8fafc" rx="12" />
+                    <!-- Two incompatible works crossed -->
+                    <!-- Spray Paint -->
+                    <g transform="translate(40, 50)">
+                        <rect x="0" y="10" width="15" height="40" rx="3" fill="#3b82f6" />
+                        <path d="M7,10 L7,0 M2,5 L12,5" stroke="#475569" stroke-width="2" />
+                        <path d="M7,0 C15,-10 25,-10 30,-5" stroke="#93c5fd" stroke-width="2" stroke-dasharray="2,2" fill="none" />
+                        <text x="25" y="25" fill="#1e3a8a" font-size="7" font-weight="bold">도장 작업</text>
+                    </g>
+                    <!-- Welding Flame -->
+                    <g transform="translate(130, 50)">
+                        <path d="M0,40 L20,10" stroke="#f97316" stroke-width="4" stroke-linecap="round" />
+                        <circle cx="23" cy="5" r="6" fill="#ef4444" />
+                        <text x="-15" y="25" fill="#7c2d12" font-size="7" font-weight="bold">용단 작업</text>
+                    </g>
+                    <!-- Warning Big Red X -->
+                    <line x1="30" y1="30" x2="170" y2="120" stroke="#ef4444" stroke-width="8" stroke-linecap="round" opacity="0.9" />
+                    <line x1="170" y1="30" x2="30" y2="120" stroke="#ef4444" stroke-width="8" stroke-linecap="round" opacity="0.9" />
+                    <rect x="55" y="105" width="90" height="25" rx="6" fill="#fef2f2" stroke="#fca5a5" stroke-width="1" />
+                    <text x="100" y="121" fill="#991b1b" font-size="8" font-weight="bold" text-anchor="middle">동시 혼재작업 원천금지</text>
+                </svg>`
+            },
+            {
+                id: 5,
+                title: "안전수호자 화재감시자 배치",
+                summary: "착화 위험 물질 주변에서 화기사용 작업 시 화재감시자가 의무 배치되었는가?",
+                icon: "fa-eye",
+                desc: "용단 작업자는 보호 쉴드를 쓰고 용단 불꽃 면에만 집중하기 때문에 뒤에서 튀어 서서히 연기가 피어오르는 비산 화재를 절대 조기 발견하지 못합니다.",
+                preventive: "인화성 자재 주변 화기 작업 시, 경보 장치(메가폰, 호각)와 상시 진압 장비(소화기, 방화포)를 직접 소지하고 전담 화재 감시 업무만 수행하는 '전담 화재감시자'를 무조건 1명 이상 등 뒤에 고정 배치해야 합니다.",
+                caseRelation: "쇼핑몰 사고 당시 철거 작업자들은 가스 토치 가위질에만 온 신경을 집중하였고, 뒤편 구석진 사각지대 불티 낙하지점을 눈으로 밀착 감시하고 통제할 화재 감시자가 한 명도 배정되지 않았습니다.",
+                goodExample: "안전모에 '화재감시자' 전용 표식을 달고 주황색 형광 조끼를 상시 착용한 전담 요원이 눈을 떼지 않고 현장을 정밀 스캐닝하며 대기하는 모습",
+                badExample: "철거 용단하는 곳 옆에서 옆집 가벼운 잡담을 나누거나 스마트폰 유튜브를 보며 시간을 때우는 껍데기뿐인 감시원",
+                svg: `<svg viewBox="0 0 200 150" class="w-full h-full">
+                    <rect width="200" height="150" fill="#f8fafc" rx="12" />
+                    <!-- Watcher Avatar -->
+                    <circle cx="100" cy="60" r="20" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2" />
+                    <!-- Orange Safety Vest -->
+                    <path d="M80,80 L120,80 L125,120 L75,120 Z" fill="#f97316" />
+                    <rect x="92" y="80" width="16" height="40" fill="#facc15" />
+                    <!-- Helmet yellow -->
+                    <path d="M80,45 C80,25 120,25 120,45 Z" fill="#facc15" />
+                    <rect x="75" y="42" width="50" height="4" fill="#eab308" rx="1" />
+                    <!-- Eyes looking sharp -->
+                    <circle cx="93" cy="55" r="3" fill="#1e293b" />
+                    <circle cx="107" cy="55" r="3" fill="#1e293b" />
+                    <!-- Megaphone / Whistle in hand -->
+                    <path d="M60,90 L75,80 L75,100 Z" fill="#dc2626" />
+                    <text x="100" y="138" fill="#1e293b" font-size="9" font-weight="black" text-anchor="middle">화재감시자 전담 지정</text>
+                    <!-- Badges -->
+                    <rect x="5" y="10" width="50" height="18" rx="4" fill="#fee2e2" />
+                    <text x="30" y="21" fill="#991b1b" font-size="7" font-weight="bold" text-anchor="middle">겸직 불가</text>
+                    <rect x="145" y="10" width="50" height="18" rx="4" fill="#dcfce7" />
+                    <text x="170" y="21" fill="#15803d" font-size="7" font-weight="bold" text-anchor="middle">전담 요원</text>
+                </svg>`
+            },
+            {
+                id: 6,
+                title: "안내 표지 및 소화설비 배치도 설치",
+                summary: "용단 작업 장소에 소화기 배치도 및 화재위험 경고 안내 표지가 올바르게 부착되었는가?",
+                icon: "fa-circle-info",
+                desc: "화재는 패닉 상태를 수반합니다. 위급한 돌발 화재 순간에 어떤 골목으로 도망쳐야 하고 소화전이 어디 있는지 단번에 눈에 들어와야 피해를 최소화합니다.",
+                preventive: "작업장 진입로나 주 통로 등 누구나 쉽게 식별 가능한 벽면에 '소화기 배치 현황판', '가장 가까운 피난 통로 비상대피 지도' 및 '화기작업 중 - 절대 경고 표지'를 큼직하게 인쇄해 걸어 두어야 합니다.",
+                caseRelation: "쇼핑몰 내부가 가설 구조벽 및 자재 보관 더미로 복잡하게 미로처럼 꼬여 있었으나, 긴급 피난 유도 표지나 가용한 비상용 소화 설비 위치도가 제대로 표시되어 있지 않아 대피 지연을 부추겼습니다.",
+                goodExample: "작업 구역 벽면 목에 '비상시 비상구 방향' 화살표 발광 시트지와 빨간색 소화전 위치 포스터를 밝게 게시한 사례",
+                badExample: "어두컴컴한 밀폐 구역 입구에 아무런 안내 팻말도 없어서 화재 연기 속에서 출구를 전혀 구분하지 못하고 우왕좌왕하는 현장",
+                svg: `<svg viewBox="0 0 200 150" class="w-full h-full">
+                    <rect width="200" height="150" fill="#f8fafc" rx="12" />
+                    <!-- Warning Map Sign -->
+                    <rect x="30" y="25" width="140" height="100" fill="white" stroke="#94a3b8" stroke-width="2" rx="4" />
+                    <!-- Title of map -->
+                    <rect x="30" y="25" width="140" height="15" fill="#f97316" rx="2" />
+                    <text x="100" y="36" fill="white" font-size="8" font-weight="bold" text-anchor="middle">화기작업구역 소화기 배치도</text>
+                    <!-- Map floorplan simple -->
+                    <rect x="40" y="50" width="45" height="35" stroke="#cbd5e1" stroke-width="1" fill="none" />
+                    <rect x="110" y="50" width="50" height="35" stroke="#cbd5e1" stroke-width="1" fill="none" />
+                    <!-- Fire Extinguisher Icon in map -->
+                    <circle cx="62" cy="68" r="6" fill="#ef4444" />
+                    <text x="62" y="71" fill="white" font-size="7" font-weight="bold" text-anchor="middle">H</text>
+                    <circle cx="135" cy="68" r="6" fill="#ef4444" />
+                    <text x="135" y="71" fill="white" font-size="7" font-weight="bold" text-anchor="middle">H</text>
+                    <!-- Escape route arrow -->
+                    <path d="M100,105 L100,115 L140,115" stroke="#22c55e" stroke-width="2" fill="none" stroke-linejoin="round" />
+                    <polygon points="140,112 146,115 140,118" fill="#22c55e" />
+                    <text x="100" y="100" fill="#1e293b" font-size="8" font-weight="bold" text-anchor="middle">피난대피 통로 표시</text>
+                </svg>`
+            },
+            {
+                id: 7,
+                title: "가스 호스 접속부 누출 검사",
+                summary: "가스 용기(LPG, 산소 등) 압력조정기와 호스 등의 접속부에서 가스 누출은 없는가?",
+                icon: "fa-gauge-high",
+                desc: "용단 가스 호스의 미세한 균열이나 체결 부위 불량으로 소량씩 새어 나오는 가스는 실내 구석 바닥에 침전되어 작은 불티 하나에도 폭발적인 플래시오버를 발생시킵니다.",
+                preventive: "당일 아침 작업 착수 시작 전에 가스 호스 밸브 접속구에 전용 거품 세척액(비눗물)을 골고루 뿌려 거품이 부글부글 일어나는지 누출 점검을 생활화하고 호스의 노화 갈라짐을 육안 필터링해야 합니다.",
+                caseRelation: "쇼핑몰 등 임시 가설 구조 현장에서는 가스 고무 관을 바닥에 질질 끌어 밟히거나 모서리에 긁힌 채 상습 누설 테스트 없이 무리하게 고온 고압 가스를 사용하다 접속부 가스 분출 폭발로 번지기 일쑤입니다.",
+                goodExample: "분무기로 거품 비눗물을 분사해 가스 밸브 나사선을 빈틈없이 세심히 바르며 공기 방울 발생 여부를 꼼꼼히 체크하는 장면",
+                badExample: "테이프나 철사 등으로 대충 가스 호스 조인트를 허술하게 묶어둔 채, 냄새가 나도 창문을 대충 열고 가스 밸브를 그대로 켜 두는 행태",
+                svg: `<svg viewBox="0 0 200 150" class="w-full h-full">
+                    <rect width="200" height="150" fill="#f8fafc" rx="12" />
+                    <!-- LPG Cylinder -->
+                    <rect x="40" y="30" width="35" height="90" rx="10" fill="#f97316" />
+                    <rect x="45" y="20" width="25" height="10" fill="#cbd5e1" />
+                    <circle cx="57" cy="15" r="5" fill="#475569" />
+                    <!-- Oxygen Cylinder -->
+                    <rect x="120" y="20" width="35" height="100" rx="10" fill="#22c55e" />
+                    <rect x="125" y="10" width="25" height="10" fill="#cbd5e1" />
+                    <circle cx="137" cy="5" r="5" fill="#475569" />
+                    <!-- Pressure Gauge -->
+                    <circle cx="92" cy="30" r="12" fill="white" stroke="#475569" stroke-width="1.5" />
+                    <line x1="92" y1="30" x2="98" y2="24" stroke="#ef4444" stroke-width="2" />
+                    <!-- Connection Hose -->
+                    <path d="M57,20 Q92,50 125,15" stroke="#cbd5e1" stroke-width="3" fill="none" />
+                    <!-- Bubbles indicator (good example) -->
+                    <circle cx="57" cy="20" r="4" fill="none" stroke="#3b82f6" stroke-width="1" />
+                    <circle cx="62" cy="23" r="2" fill="none" stroke="#3b82f6" stroke-width="1" />
+                    <circle cx="133" cy="15" r="3" fill="none" stroke="#3b82f6" stroke-width="1" />
+                    <text x="100" y="138" fill="#1e293b" font-size="9" font-weight="bold" text-anchor="middle">비눗물 누출 점검 완료</text>
+                </svg>`
+            },
+            {
+                id: 8,
+                title: "잔류 잔가스 확인 및 환기 조치",
+                summary: "인화성 가스 체류 배관·용기 작업 전 가스 누출 및 잔류가스 방출을 완료하였는가?",
+                icon: "fa-wind",
+                desc: "밀폐 구역의 가스관, 보일러 탱크 배관 등 내부 깊숙한 음압 지대에 잠복 체류 중인 유증기 및 인화성 배출가스는 사전 환기 절차 없이 용단 불꽃을 들이대는 즉시 거대한 미사일 폭발처럼 터져버립니다.",
+                preventive: "인화성 가스가 흐르던 배관 용기 작업 전에 밸브를 철저히 고정 잠금하고, 내부에 불활성 가스(N2 등)를 불어넣어 완벽하게 치환(퍼징) 세척한 뒤 가스 측정기로 잔류 가스 농도가 0%인지 정밀 관측하고 환기팬을 상시 작동해야 합니다.",
+                caseRelation: "쇼핑몰 인테리어 매장 내 보일러 가스 파이프나 노후 가스 배관 라인을 사전에 완벽히 잠그고 공기를 배출하지 않은 상태에서 성급히 기계 톱이나 불꽃 용단기로 절단을 개시해 배관 내 불꽃 역화 폭발이 생길 수 있었습니다.",
+                goodExample: "작업 전 관로 내부 공기를 휴대용 흡입 측정기로 측정하여 농도 '0% LEL' 합격 수치를 확인하고 무동력 송풍기를 돌리는 장면",
+                badExample: "가스 배관 안에 남아있던 기름이나 잔류 가스를 비우지도 않고 귀찮다는 이유로 곧바로 불을 붙여 자르는 성급한 상황",
+                svg: `<svg viewBox="0 0 200 150" class="w-full h-full">
+                    <rect width="200" height="150" fill="#f8fafc" rx="12" />
+                    <!-- Steel pipe -->
+                    <rect x="20" y="60" width="160" height="30" fill="#cbd5e1" stroke="#94a3b8" stroke-width="2" />
+                    <!-- Vent Fan icon -->
+                    <g transform="translate(145, 45)">
+                        <circle cx="15" cy="30" r="15" fill="#3b82f6" opacity="0.2" />
+                        <path d="M15,15 L15,45 M0,30 L30,30" stroke="#3b82f6" stroke-width="3" />
+                    </g>
+                    <!-- Airflow waves -->
+                    <path d="M50,75 Q70,65 90,75 T130,75" stroke="#60a5fa" stroke-width="1.5" fill="none" stroke-dasharray="3,3" />
+                    <!-- Gas Detector -->
+                    <rect x="40" y="20" width="30" height="40" rx="3" fill="#1e293b" />
+                    <rect x="44" y="24" width="22" height="12" fill="#22c55e" rx="1" />
+                    <text x="55" y="32" fill="white" font-size="6" font-weight="bold" text-anchor="middle">SAFE 0%</text>
+                    <circle cx="55" cy="46" r="3" fill="#cbd5e1" />
+                    <text x="100" y="115" fill="#475569" font-size="8" font-weight="bold" text-anchor="middle">무동력 환기 & 관로 내부 가스 치환</text>
+                    <text x="100" y="130" fill="#1e293b" font-size="9" font-weight="black" text-anchor="middle">작업 전 질소 치환/가스 측정 완료</text>
+                </svg>`
+            }
+        ];
+
+        // 자가진단 상태 보관용 객체
+        let selfEvaluationState = Array(8).fill(null); // null = 미체크, true = 예, false = 아니오
+
+        // Toast 알림 함수
+        function showToast(message, isSuccess = true) {
+            const toast = document.getElementById("toast");
+            const toastMessage = document.getElementById("toast-message");
+            const toastIcon = document.getElementById("toast-icon");
+            
+            toastMessage.textContent = message;
+            if (isSuccess) {
+                toastIcon.innerHTML = `<i class="fa-solid fa-circle-check text-accent-500"></i>`;
+                toast.className = "fixed bottom-5 right-5 z-50 transform translate-y-0 opacity-100 transition-all duration-300 bg-slate-900 text-white px-6 py-3 rounded-2xl shadow-xl flex items-center gap-3 border border-slate-700";
+            } else {
+                toastIcon.innerHTML = `<i class="fa-solid fa-circle-exclamation text-danger-500"></i>`;
+                toast.className = "fixed bottom-5 right-5 z-50 transform translate-y-0 opacity-100 transition-all duration-300 bg-slate-900 text-white px-6 py-3 rounded-2xl shadow-xl flex items-center gap-3 border border-slate-700";
+            }
+
+            setTimeout(() => {
+                toast.className = "fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none bg-slate-900 text-white px-6 py-3 rounded-2xl shadow-xl flex items-center gap-3 border border-slate-700";
+            }, 3000);
+        }
+
+        // 활성화된 체크리스트 ID 보관 변수
+        let activeChecklistId = 1;
+
+        // 체크리스트 메뉴 렌더링 함수
+        function renderChecklistMenu() {
+            const container = document.getElementById("checklist-menu-container");
+            container.innerHTML = "";
+
+            checklistData.forEach(item => {
+                const isActive = item.id === activeChecklistId;
+                const button = document.createElement("button");
+                button.type = "button";
+                button.onclick = () => selectChecklist(item.id);
+                button.className = `w-full text-left p-4 rounded-2xl border transition-all duration-200 flex items-center justify-between group ${
+                    isActive 
+                    ? "bg-brand-500 border-brand-500 text-white shadow-lg shadow-brand-500/15 scale-[1.02] z-10" 
+                    : "bg-white border-gray-100 hover:border-brand-200 hover:bg-orange-50/40 text-gray-700"
+                }`;
+
+                // 체크 여부 파악용 배지
+                const isTested = selfEvaluationState[item.id - 1];
+                let badgeHTML = "";
+                if (isTested === true) {
+                    badgeHTML = `<span class="bg-accent-100 text-accent-800 text-[10px] font-bold px-2 py-0.5 rounded-full"><i class="fa-solid fa-check"></i> 합격</span>`;
+                } else if (isTested === false) {
+                    badgeHTML = `<span class="bg-red-100 text-red-800 text-[10px] font-bold px-2 py-0.5 rounded-full"><i class="fa-solid fa-xmark"></i> 위험</span>`;
+                }
+
+                button.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl flex items-center justify-center text-lg shrink-0 ${
+                            isActive ? "bg-white/20 text-white" : "bg-orange-100 text-brand-600 group-hover:bg-brand-500 group-hover:text-white transition-all"
+                        }">
+                            <i class="fa-solid ${item.icon}"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="text-xs ${isActive ? "text-orange-100" : "text-gray-400"} font-semibold block">체크리스트 0${item.id}</span>
+                            <span class="font-bold text-sm sm:text-base tracking-tight block">${item.title}</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        ${badgeHTML}
+                        <i class="fa-solid fa-chevron-right text-xs opacity-60 group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                `;
+                container.appendChild(button);
+            });
+        }
+
+        // 체크리스트 항목 변경 동작 함수
+        function selectChecklist(id) {
+            activeChecklistId = id;
+            renderChecklistMenu();
+            renderChecklistDetail();
+        }
+
+        // 상세 점검 박스 그리기 함수
+        function renderChecklistDetail() {
+            const detailBox = document.getElementById("checklist-detail-box");
+            const item = checklistData.find(i => i.id === activeChecklistId);
+            
+            // 페이드 인 아웃 임시 적용
+            detailBox.style.opacity = "0.2";
+            
+            setTimeout(() => {
+                detailBox.innerHTML = `
+                    <div class="space-y-6">
+                        <!-- Top Head Details -->
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-5">
+                            <div>
+                                <span class="bg-brand-100 text-brand-800 text-xs font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">점검 사항 0${item.id}</span>
+                                <h4 class="text-2xl font-black text-gray-900 mt-1 tracking-tight">${item.title}</h4>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="setDirectEvaluation(${item.id}, true)" class="px-4 py-2 bg-accent-50 hover:bg-accent-100 border border-accent-200 text-accent-800 text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 shadow-sm">
+                                    <i class="fa-solid fa-circle-check"></i> 예 (합격)
+                                </button>
+                                <button onclick="setDirectEvaluation(${item.id}, false)" class="px-4 py-2 bg-red-50 hover:bg-red-100 border border-red-200 text-red-800 text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 shadow-sm">
+                                    <i class="fa-solid fa-circle-xmark"></i> 아니오 (불량)
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 핵심 질문 요약 배너 -->
+                        <div class="bg-orange-50 border-l-4 border-brand-500 p-4 rounded-r-2xl">
+                            <span class="text-xs font-bold text-brand-700 uppercase block mb-1">핵심 체크 포인트</span>
+                            <p class="text-sm sm:text-base font-bold text-brand-900 leading-snug">"${item.summary}"</p>
+                        </div>
+
+                        <!-- 일러스트 및 설명 영역 레이아웃 -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                            <div class="aspect-video sm:aspect-square bg-slate-50 border border-slate-100 rounded-2xl flex items-center justify-center p-4 shadow-inner">
+                                ${item.svg}
+                            </div>
+                            <div class="space-y-4">
+                                <div>
+                                    <h5 class="text-xs font-bold text-gray-400 uppercase tracking-wide">위험 요소 (Why)</h5>
+                                    <p class="text-sm text-gray-600 mt-1 leading-relaxed">${item.desc}</p>
+                                </div>
+                                <div>
+                                    <h5 class="text-xs font-bold text-emerald-600 uppercase tracking-wide">예방안전 가이드라인 (How)</h5>
+                                    <p class="text-sm text-gray-700 mt-1 font-semibold leading-relaxed">${item.preventive}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 사고사례 7번 연계 집중해부 -->
+                        <div class="bg-slate-50 rounded-2xl p-4 sm:p-5 border border-slate-100 space-y-2">
+                            <h5 class="text-xs font-extrabold text-red-600 uppercase tracking-wider flex items-center gap-1.5">
+                                <i class="fa-solid fa-magnifying-glass-chart"></i>
+                                <span>사고사례 7번 (쇼핑몰 화재) 연계 현장분석</span>
+                            </h5>
+                            <p class="text-xs sm:text-sm text-gray-600 leading-relaxed font-medium">
+                                ${item.caseRelation}
+                            </p>
+                        </div>
+
+                        <!-- 좋은 예 vs 나쁜 예 가이드텍스트 -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-gray-100">
+                            <div class="bg-emerald-50/50 p-3 rounded-xl border border-emerald-100 flex items-start gap-2.5">
+                                <span class="bg-emerald-500 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">O</span>
+                                <div>
+                                    <strong class="text-xs text-emerald-800 block">좋은 예시</strong>
+                                    <p class="text-xs text-emerald-700 mt-0.5 leading-normal">${item.goodExample}</p>
+                                </div>
+                            </div>
+                            <div class="bg-red-50/50 p-3 rounded-xl border border-red-100 flex items-start gap-2.5">
+                                <span class="bg-red-500 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">X</span>
+                                <div>
+                                    <strong class="text-xs text-red-800 block">나쁜 예시</strong>
+                                    <p class="text-xs text-red-700 mt-0.5 leading-normal">${item.badExample}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                detailBox.style.opacity = "1";
+            }, 150);
+        }
+
+        // 직접 평가 동기화 함수
+        function setDirectEvaluation(id, status) {
+            selfEvaluationState[id - 1] = status;
+            
+            // 점검 항목 라디오 버튼도 업데이트
+            const radio = document.getElementById(`eval-${id}-${status ? 'yes' : 'no'}`);
+            if (radio) {
+                radio.checked = true;
+            }
+
+            // 전반적 상태 스코어 계산 및 리랜더링
+            calculateScore();
+            renderChecklistMenu();
+            showToast(`체크리스트 0${id} 항목 점검 상태를 반영했습니다!`, status);
+        }
+
+        // 자가진단 문항 리스트 렌더링 함수
+        function renderEvaluationForm() {
+            const form = document.getElementById("evaluation-form");
+            form.innerHTML = "";
+
+            checklistData.forEach(item => {
+                const itemDiv = document.createElement("div");
+                itemDiv.className = "bg-white p-4 rounded-2xl border border-brand-100 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-brand-200 transition-colors";
+                
+                itemDiv.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <span class="bg-brand-100 text-brand-800 text-xs font-bold w-6 h-6 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+                            ${item.id}
+                        </span>
+                        <div>
+                            <strong class="text-gray-900 text-sm sm:text-base font-bold block leading-tight">${item.title}</strong>
+                            <p class="text-xs text-gray-500 mt-1">${item.summary}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-2 shrink-0">
+                        <label class="relative flex items-center gap-1.5 cursor-pointer select-none">
+                            <input type="radio" name="eval-${item.id}" id="eval-${item.id}-yes" onchange="setDirectEvaluation(${item.id}, true)" class="sr-only peer">
+                            <div class="px-3.5 py-1.5 rounded-xl border border-gray-200 text-xs font-bold text-gray-500 peer-checked:bg-emerald-500 peer-checked:border-emerald-500 peer-checked:text-white transition-all shadow-sm">
+                                <i class="fa-solid fa-check mr-1"></i> 예
+                            </div>
+                        </label>
+                        <label class="relative flex items-center gap-1.5 cursor-pointer select-none">
+                            <input type="radio" name="eval-${item.id}" id="eval-${item.id}-no" onchange="setDirectEvaluation(${item.id}, false)" class="sr-only peer">
+                            <div class="px-3.5 py-1.5 rounded-xl border border-gray-200 text-xs font-bold text-gray-500 peer-checked:bg-red-500 peer-checked:border-red-500 peer-checked:text-white transition-all shadow-sm">
+                                <i class="fa-solid fa-xmark mr-1"></i> 아니오
+                            </div>
+                        </label>
+                    </div>
+                `;
+                form.appendChild(itemDiv);
+            });
+        }
+
+        // 스코어 종합 계산 및 화면 반영 함수
+        function calculateScore() {
+            const total = checklistData.length;
+            const checkedArray = selfEvaluationState.filter(v => v !== null);
+            const checkedCount = checkedArray.length;
+            const passCount = selfEvaluationState.filter(v => v === true).length;
+            
+            // 점수 퍼센티지 산출
+            const scorePercent = checkedCount === 0 ? 0 : Math.round((passCount / total) * 100);
+
+            // 게이지바 및 인포 텍스트 업데이트
+            document.getElementById("safety-score-percent").textContent = `${scorePercent}%`;
+            document.getElementById("safety-progress-bar").style.width = `${scorePercent}%`;
+            document.getElementById("safety-checked-count").textContent = `총 8개 항목 중 ${checkedCount}개 평가 완료 (합격 ${passCount}개)`;
+
+            // 등급 산출
+            const label = document.getElementById("safety-score-label");
+            if (checkedCount < total) {
+                label.textContent = "평가 진행 중";
+                label.className = "text-xs font-bold px-2 py-1 bg-amber-100 text-amber-800 rounded-md";
+            } else if (scorePercent >= 90) {
+                label.textContent = "매우 양호 (화재 무재해 달성 가능)";
+                label.className = "text-xs font-bold px-2 py-1 bg-emerald-100 text-emerald-800 rounded-md";
+            } else if (scorePercent >= 70) {
+                label.textContent = "주의 필요 (일부 보완 즉시 실시)";
+                label.className = "text-xs font-bold px-2 py-1 bg-orange-100 text-orange-800 rounded-md";
+            } else {
+                label.textContent = "매우 취약 (즉시 화기작업 중단 및 전면 보완)";
+                label.className = "text-xs font-bold px-2 py-1 bg-red-100 text-red-800 rounded-md";
+            }
+        }
+
+        // 클립보드 복사 유틸리티 구현 (호환성 보장 기법 적용)
+        function copyChecklistResult() {
+            const total = checklistData.length;
+            const checkedCount = selfEvaluationState.filter(v => v !== null).length;
+            const passCount = selfEvaluationState.filter(v => v === true).length;
+            const scorePercent = checkedCount === 0 ? 0 : Math.round((passCount / total) * 100);
+
+            let textResult = `[용단작업 화재예방 자율안전진단 결과서]\n`;
+            textResult += `- 평가일시: ${new Date().toLocaleString()}\n`;
+            textResult += `- 대상 사고사례: 7번 (쇼핑몰 원상복구 철거 용단 화재)\n`;
+            textResult += `- 자가진단 진행도: 8개 문항 중 ${checkedCount}개 완료\n`;
+            textResult += `- 화재안전 예방 스코어: ${scorePercent}점 (합격 ${passCount}개, 불량 ${checkedCount - passCount}개)\n\n`;
+            textResult += `[상세 체크리스트 항목별 진단 현황]\n`;
+
+            checklistData.forEach((item, index) => {
+                const state = selfEvaluationState[index];
+                let stateText = "미점검";
+                if (state === true) stateText = "합격 (예)";
+                if (state === false) stateText = "불량 (아니오)";
+                textResult += `${index + 1}. ${item.title}: ${stateText}\n`;
+            });
+
+            textResult += `\n* 본 진단결과는 현장용 자율 관리 목적의 문서입니다. 즉시 불합격 항목을 조치바랍니다.`;
+
+            // 크로스 브라우저 호환성 복사 로직 실행
+            const textarea = document.createElement("textarea");
+            textarea.value = textResult;
+            textarea.style.position = "absolute";
+            textarea.style.left = "-9999px";
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                const successful = document.execCommand("copy");
+                if (successful) {
+                    showToast("안전 자율진단 보고서가 클립보드에 복사되었습니다!", true);
+                } else {
+                    showToast("복사하지 못했습니다. 수동으로 드래그 복사해 주세요.", false);
+                }
+            } catch (err) {
+                showToast("오류가 발생해 복사에 실패했습니다.", false);
+            }
+            
+            document.body.removeChild(textarea);
+        }
+
+        // 브라우저 초기 부팅 설정
+        window.onload = function() {
+            renderChecklistMenu();
+            renderChecklistDetail();
+            renderEvaluationForm();
+            calculateScore();
+        };
+    </script>
+</body>
+</html>

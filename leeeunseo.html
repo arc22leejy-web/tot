@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>우기대비 고위험 건설현장 안전점검 시스템</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons (for modern look) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Pretendard', sans-serif;
+        }
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            .print-card {
+                border: 1px solid #e5e7eb !important;
+                box-shadow: none !important;
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+
+    <!-- 상단 네비게이션 헤더 -->
+    <header class="bg-slate-900 text-white shadow-md sticky top-0 z-50 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-amber-500 text-slate-900 p-2 rounded-lg font-bold flex items-center justify-center">
+                    <i data-lucide="cloud-rain" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight">우기대비 안전점검 시스템</h1>
+                    <p class="text-xs text-slate-400">고위험 건설공사 현장용</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button onclick="window.print()" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-semibold px-4 py-2 rounded-lg transition-colors flex items-center space-x-2 text-sm shadow">
+                    <i data-lucide="printer" class="w-4 h-4"></i>
+                    <span>보고서 출력 / PDF</span>
+                </button>
+                <button onclick="resetChecklist()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium px-3 py-2 rounded-lg transition-colors text-sm border border-slate-700">
+                    초기화
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- 현장 기본 정보 입력란 (출력시 보고서 상단에 포함됨) -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-8 print-card">
+            <div class="flex items-center space-x-2 mb-4 no-print">
+                <i data-lucide="info" class="text-amber-500 w-5 h-5"></i>
+                <h2 class="text-lg font-bold text-slate-900">현장 및 점검 정보 등록</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">공사명</label>
+                    <input type="text" id="proj-name" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-amber-500" value="00구역 도시재생 가설 공사">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">점검 일자</label>
+                    <input type="date" id="check-date" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-amber-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">점검자 (직급/성명)</label>
+                    <input type="text" id="inspector" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-amber-500" value="홍길동 안전팀장">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 mb-1">현장 총책임자</label>
+                    <input type="text" id="manager" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-amber-500" value="김건설 현장소장">
+                </div>
+            </div>
+        </div>
+
+        <!-- 실시간 진행 현황 요약 보드 (대시보드) -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8 no-print">
+            
+            <!-- 전반적인 진행 점수 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex flex-col justify-between">
+                <div>
+                    <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full uppercase tracking-wider">우기대비 집중기간</span>
+                    <h3 class="text-xl font-bold text-slate-900 mt-2">종합 점검 진행률</h3>
+                </div>
+                <div class="my-6 flex items-center justify-between">
+                    <div>
+                        <span class="text-5xl font-extrabold text-slate-900" id="total-progress-percentage">0%</span>
+                        <p class="text-xs text-slate-500 mt-1"><span id="total-checked-count">0</span> / <span id="total-items-count">0</span> 개 완료</p>
+                    </div>
+                    <!-- 진행률 원형 게이지 -->
+                    <div class="relative w-24 h-24 flex items-center justify-center">
+                        <svg class="w-full h-full transform -rotate-90">
+                            <circle cx="48" cy="48" r="40" stroke="#e2e8f0" stroke-width="8" fill="transparent" />
+                            <circle cx="48" cy="48" r="40" stroke="#f59e0b" stroke-width="8" fill="transparent" stroke-dasharray="251.2" stroke-dashoffset="251.2" id="progress-circle" class="transition-all duration-500" />
+                        </svg>
+                        <span class="absolute text-slate-500"><i data-lucide="check-circle-2" class="w-8 h-8 text-amber-500"></i></span>
+                    </div>
+                </div>
+                <div class="w-full bg-slate-100 rounded-full h-2">
+                    <div class="bg-amber-500 h-2 rounded-full transition-all duration-500" id="total-progress-bar" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- 상태별 요약 카드 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+                <h3 class="text-lg font-bold text-slate-900 mb-4">점검 상태 요약</h3>
+                <div class="grid grid-cols-3 gap-3">
+                    <div class="bg-emerald-50 rounded-xl p-4 text-center border border-emerald-100">
+                        <i data-lucide="check-circle" class="w-6 h-6 text-emerald-600 mx-auto mb-1"></i>
+                        <span class="text-xs text-slate-500 font-medium">양호</span>
+                        <p class="text-2xl font-extrabold text-emerald-600 mt-1" id="summary-good">0</p>
+                    </div>
+                    <div class="bg-rose-50 rounded-xl p-4 text-center border border-rose-100">
+                        <i data-lucide="alert-triangle" class="w-6 h-6 text-rose-600 mx-auto mb-1"></i>
+                        <span class="text-xs text-slate-500 font-medium">불량(조치필요)</span>
+                        <p class="text-2xl font-extrabold text-rose-600 mt-1" id="summary-bad">0</p>
+                    </div>
+                    <div class="bg-slate-50 rounded-xl p-4 text-center border border-slate-200">
+                        <i data-lucide="ban" class="w-6 h-6 text-slate-400 mx-auto mb-1"></i>
+                        <span class="text-xs text-slate-500 font-medium">해당없음</span>
+                        <p class="text-2xl font-extrabold text-slate-500 mt-1" id="summary-none">0</p>
+                    </div>
+                </div>
+                <div class="mt-4 p-3 bg-amber-50 rounded-xl flex items-start space-x-2 text-xs text-amber-800 border border-amber-100">
+                    <i data-lucide="shield-alert" class="w-4 h-4 mt-0.5 flex-shrink-0 text-amber-600"></i>
+                    <span>불량 판정 항목은 점검표 하단에서 즉시 원인을 확인하고 우기 전 조치를 취해야 합니다.</span>
+                </div>
+            </div>
+
+            <!-- 기상 예보 및 알림 연동 예시 (모의) -->
+            <div class="bg-slate-900 text-white rounded-2xl shadow-sm p-6 flex flex-col justify-between">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <span class="text-xs bg-slate-800 text-amber-400 font-bold px-2 py-1 rounded">기상특보 실시간 모니터링</span>
+                        <h4 class="text-lg font-bold mt-2 text-slate-100">현장 기상 모의 알림</h4>
+                    </div>
+                    <span class="text-amber-500 animate-pulse"><i data-lucide="zap" class="w-5 h-5"></i></span>
+                </div>
+                <div class="my-4 flex items-center space-x-4">
+                    <div class="text-4xl">🌦️</div>
+                    <div>
+                        <p class="font-semibold text-sm">3일 후 집중호우 예보 (강수확률 85%)</p>
+                        <p class="text-xs text-slate-400">예상 강우량: 일 80mm 이상 예상</p>
+                    </div>
+                </div>
+                <div class="bg-slate-800 p-3 rounded-lg text-xs text-slate-300 border border-slate-700">
+                    <p class="font-semibold text-amber-400">🚨 현장소장 특별 지시</p>
+                    <p class="mt-0.5">금일 중으로 임시 배수로 전구간 소통 상태 점검 및 양수기 유류량 충진 상태를 최종 확인 바랍니다.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 메인 점검표 시작 -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden print-card mb-8">
+            <div class="p-6 bg-slate-50 border-b border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 no-print">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900">우기대비 고위험 현장 세부 안전점검표</h2>
+                    <p class="text-xs text-slate-500 mt-0.5">각 항목별 점검 결과를 입력해 주세요. (자동 저장됩니다)</p>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="filterItems('all')" id="btn-filter-all" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-white transition-colors">전체보기</button>
+                    <button onclick="filterItems('bad')" id="btn-filter-bad" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors flex items-center space-x-1">
+                        <span>불량 항목만</span>
+                        <span class="bg-rose-100 text-rose-700 px-1.5 rounded-full text-[10px]" id="filter-bad-count">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 카테고리 1: 건설공사장 일반사항 -->
+            <div class="category-section" data-cat="general">
+                <div class="bg-slate-100/80 px-6 py-3 border-b border-slate-200 flex justify-between items-center">
+                    <div class="flex items-center space-x-2">
+                        <span class="bg-indigo-600 text-white text-xs px-2 py-0.5 rounded font-bold">1</span>
+                        <h3 class="font-bold text-slate-800 text-sm md:text-base">건설 공사장 - 일반사항</h3>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-500" id="cat-progress-general">0 / 0 완료</span>
+                </div>
+                <div class="divide-y divide-slate-100" id="list-general">
+                    <!-- JS에서 동적으로 생성 -->
+                </div>
+            </div>
+
+            <!-- 카테고리 2: 공사 현장주변 점검 -->
+            <div class="category-section" data-cat="surroundings">
+                <div class="bg-slate-100/80 px-6 py-3 border-b border-slate-200 flex justify-between items-center">
+                    <div class="flex items-center space-x-2">
+                        <span class="bg-indigo-600 text-white text-xs px-2 py-0.5 rounded font-bold">2</span>
+                        <h3 class="font-bold text-slate-800 text-sm md:text-base">공사 현장주변 점검 실시</h3>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-500" id="cat-progress-surroundings">0 / 0 완료</span>
+                </div>
+                <div class="divide-y divide-slate-100" id="list-surroundings">
+                    <!-- JS에서 동적으로 생성 -->
+                </div>
+            </div>
+
+            <!-- 카테고리 3: 배수공 -->
+            <div class="category-section" data-cat="drainage">
+                <div class="bg-slate-100/80 px-6 py-3 border-b border-slate-200 flex justify-between items-center">
+                    <div class="flex items-center space-x-2">
+                        <span class="bg-indigo-600 text-white text-xs px-2 py-0.5 rounded font-bold">3</span>
+                        <h3 class="font-bold text-slate-800 text-sm md:text-base">배수공 및 유실 방지 대책</h3>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-500" id="cat-progress-drainage">0 / 0 완료</span>
+                </div>
+                <div class="divide-y divide-slate-100" id="list-drainage">
+                    <!-- JS에서 동적으로 생성 -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 하단 정보 및 최종 결재란 (출력 시 하단 서명란 제공) -->
+        <div class="mt-12 border-t border-slate-300 pt-8 print-card">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div>
+                    <p class="text-sm font-semibold text-slate-700">본 안전점검표는 우기대비 고위험 건설공사현장 안전기준 표준가이드를 참고하여 작성되었습니다.</p>
+                    <p class="text-xs text-slate-400 mt-1">최종 변경시간: <span id="last-saved-time">오전 11시 00분</span></p>
+                </div>
+                <div class="flex space-x-8 text-center text-sm">
+                    <div class="w-24">
+                        <p class="text-xs text-slate-500 mb-6">안전관리자</p>
+                        <div class="border-b border-slate-400 w-full h-8 flex items-center justify-center text-slate-400 text-xs">(서명 또는 인)</div>
+                    </div>
+                    <div class="w-24">
+                        <p class="text-xs text-slate-500 mb-6">현장대리인</p>
+                        <div class="border-b border-slate-400 w-full h-8 flex items-center justify-center text-slate-400 text-xs">(서명 또는 인)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="bg-slate-900 text-slate-400 py-6 mt-16 no-print text-center text-xs border-t border-slate-800">
+        <p>© 2026 건설안전 점검시스템. All Rights Reserved.</p>
+        <p class="mt-1 text-slate-600">본 페이지는 모바일 크기에 완전히 대응하며, 브라우저 스토리지에 결과가 실시간으로 보존됩니다.</p>
+    </footer>
+
+    <!-- 비상 경고 메시지 토스트 (알림용) -->
+    <div id="toast-message" class="fixed bottom-5 right-5 bg-slate-950 text-white py-3 px-5 rounded-xl shadow-2xl flex items-center space-x-3 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none z-50">
+        <span class="text-amber-400"><i data-lucide="check-circle" class="w-5 h-5"></i></span>
+        <span class="text-sm font-medium" id="toast-text">기본 텍스트</span>
+    </div>
+
+    <!-- 스크립트 파일 작성 -->
+    <script>
+        // 체크리스트 마스터 원본 데이터 정의
+        const checklistItems = [
+            // 1. 일반사항
+            {
+                id: "gen-1",
+                category: "general",
+                title: "예상 강우량 산정 및 배수계획 수립",
+                desc: "현장 위치에 따른 예상 강우량을 사전 산정하고 신뢰성 있는 배수계획을 수립하였는가?"
+            },
+            {
+                id: "gen-2",
+                category: "general",
+                title: "충분한 수방자재 확보 여부",
+                desc: "양수기, 마대, 가마니, 삽, 수레, 우비, 장화 등 긴급 대피 및 방재 자재가 품목별로 정량 확보되어 있는가?"
+            },
+            {
+                id: "gen-3",
+                category: "general",
+                title: "여유 예비양수기 확보 및 작동 여부",
+                desc: "양수기 고장 시를 대비하여 평상시 50% 이상의 예비양수기를 확보하고, 시운전 테스트가 원활한가?"
+            },
+            {
+                id: "gen-4",
+                category: "general",
+                title: "유입구, 집수정, 맨홀, 연결관 사전 정비",
+                desc: "토사물 유실 방지를 위한 침사지, 유입/유출구, 집수정, 맨홀, 연결관에 대한 전면 청소 및 청결을 점검했는가?"
+            },
+            {
+                id: "gen-5",
+                category: "general",
+                title: "현장 내 비상대기반 편성 및 운영",
+                desc: "악천후 및 비상상황 대비 주·야간 현장 비상근무 대기반을 명확히 조직하고 비상소집체계를 마련했는가?"
+            },
+            {
+                id: "gen-6",
+                category: "general",
+                title: "가설도로에 대한 차량 통행 안전 확보",
+                desc: "공사용 가설도로의 노면 배수 구배 상태, 쇄석 다짐 정도, 경사지 차량 슬립(미끄러짐) 방지 조치를 완료하였는가?"
+            },
+            {
+                id: "gen-7",
+                category: "general",
+                title: "지하매설물 관련기관 비상연락망 구축 및 대책협의",
+                desc: "도시가스, 한전, 상수도 등 지하매설물 관련 기관들과 비상사태 대응을 위한 사전 협의 및 즉시 연락 가능한 핫라인이 구축되어 있는가?"
+            },
+
+            // 2. 공사 현장주변 점검
+            {
+                id: "sur-1",
+                category: "surroundings",
+                title: "현장부지 내 배수로 확보 상태",
+                desc: "부지 내 상류측 배수로가 토사 퇴적으로 막히지 않고 완전히 우수로 확보가 되어 있는가?"
+            },
+            {
+                id: "sur-2",
+                category: "surroundings",
+                title: "양수기 정비 작동 테스트 완료",
+                desc: "현장 내 고정식/이동식 양수기의 펌프 임펠러, 유류량, 전원선 상태를 테스트하여 실 가동률 100%를 보장하는가?"
+            },
+            {
+                id: "sur-3",
+                category: "surroundings",
+                title: "공사용 도로 전구간 파손 점검",
+                desc: "강우 시 약화된 지반으로 지반 침하, 가설도로 균열, 유실 위험이 발생할 구간이 없는지 상태를 철저히 체크했는가?"
+            },
+            {
+                id: "sur-4",
+                category: "surroundings",
+                title: "유관 지하매설물 지반 이상 무",
+                desc: "굴착 주변 구간 지하 전력구, 가스관, 상수도 배관 주변 지반의 공동이나 균열 발생 여부를 순찰 점검하였는가?"
+            },
+
+            // 3. 배수공
+            {
+                id: "dra-1",
+                category: "drainage",
+                title: "측구 및 토공작업 구간 배수로 및 표면수 유입방지",
+                desc: "경사면 상단 및 토석 작업지의 외부 우수 유입 방지를 위한 임시 물막이 턱이나 표면수 유도시설이 설치되었는가?"
+            },
+            {
+                id: "dra-2",
+                category: "drainage",
+                title: "배수암거 및 집수정 조기 시공",
+                desc: "본공사 설계상 반영된 배수암거와 메인 집수정을 강우 전으로 일정을 당겨 선행 설치하였는가?"
+            },
+            {
+                id: "dra-3",
+                category: "drainage",
+                title: "가배수로 및 침사지 설치 및 고도 확보",
+                desc: "기존 자연배수로의 원활한 유입과 절토부 붕괴 방지를 위해 현장 경계부, 법면 상단, 지하구조물 측면에 배수 인프라가 조성되었는가?"
+            },
+            {
+                id: "dra-4",
+                category: "drainage",
+                title: "기존 기 시공된 배수관로 내 토사 및 잡물 준설",
+                desc: "이미 매설 시공된 우수관거 내에 흙이나 자갈이 쌓여 소통 장애를 주는 일이 없도록 사전 고압 청소를 완료했는가?"
+            },
+            {
+                id: "dra-5",
+                category: "drainage",
+                title: "토사유실 방지 및 석축/옹벽 보호 조치",
+                desc: "절토 법면과 불안정한 흙막이 배면, 이미 시공된 구조물 주변에 방수 비닐막 씌우기 및 마대 쌓기 보강 공법이 올바르게 설계 조치되었는가?"
+            },
+            {
+                id: "dra-6",
+                category: "drainage",
+                title: "지하작업장 우수 노면수 유입방지 유도시설",
+                desc: "폭우 시 노면의 유수(흘러 다니는 물)가 지하층 굴착 바닥면으로 밀려들지 않도록 차수 배리어 및 유도 수로를 구축했는가?"
+            },
+            {
+                id: "dra-7",
+                category: "drainage",
+                title: "지하 우수처리 내부 배수처리대책 수립 및 실천",
+                desc: "지하 작업장 바닥 구석에 집수 고리를 파고 즉시 배출할 수 있는 고양정 대형 수중펌프 배치가 완료되었는가?"
+            }
+        ];
+
+        // 기본 상태 데이터 초기 설정
+        let userState = {
+            scores: {}, // item_id : "good" | "bad" | "none" | null
+            memos: {}   // item_id : string
+        };
+
+        // 로컬스토리지에서 이전에 수정한 데이터 복구
+        function loadState() {
+            const saved = localStorage.getItem('safety_checklist_v1');
+            if (saved) {
+                try {
+                    userState = JSON.parse(saved);
+                } catch (e) {
+                    console.error("데이터 복구 실패, 기본값으로 설정합니다.");
+                }
+            }
+        }
+
+        function saveState() {
+            localStorage.setItem('safety_checklist_v1', JSON.stringify(userState));
+            updateDashboard();
+            updateLastSavedTime();
+        }
+
+        // 마지막 저장 시간 업데이트
+        function updateLastSavedTime() {
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const ampm = hours >= 12 ? '오후' : '오전';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // 0시는 12시로 표시
+            document.getElementById('last-saved-time').innerText = `${ampm} ${hours}시 ${minutes}분`;
+        }
+
+        // 대시보드 진행률 및 카운트 현황 최신화
+        function updateDashboard() {
+            let total = checklistItems.length;
+            let checked = 0;
+            let goodCount = 0;
+            let badCount = 0;
+            let noneCount = 0;
+
+            // 카테고리별 계산용 객체
+            let catStats = {
+                general: { total: 0, checked: 0 },
+                surroundings: { total: 0, checked: 0 },
+                drainage: { total: 0, checked: 0 }
+            };
+
+            checklistItems.forEach(item => {
+                catStats[item.category].total++;
+                const status = userState.scores[item.id];
+                if (status) {
+                    checked++;
+                    catStats[item.category].checked++;
+                    if (status === 'good') goodCount++;
+                    else if (status === 'bad') badCount++;
+                    else if (status === 'none') noneCount++;
+                }
+            });
+
+            // 전체 진행률 계산
+            const percentage = total > 0 ? Math.round((checked / total) * 100) : 0;
+            document.getElementById('total-progress-percentage').innerText = `${percentage}%`;
+            document.getElementById('total-checked-count').innerText = checked;
+            document.getElementById('total-items-count').innerText = total;
+
+            // 바 게이지 및 원형 게이지 업데이트
+            document.getElementById('total-progress-bar').style.width = `${percentage}%`;
+            
+            // SVG 서클 애니메이션 계산 (둘레길이 251.2 기준)
+            const circle = document.getElementById('progress-circle');
+            const offset = 251.2 - (percentage / 100) * 251.2;
+            circle.setAttribute('stroke-dashoffset', offset);
+
+            // 상태 요약 텍스트 업데이트
+            document.getElementById('summary-good').innerText = goodCount;
+            document.getElementById('summary-bad').innerText = badCount;
+            document.getElementById('summary-none').innerText = noneCount;
+            document.getElementById('filter-bad-count').innerText = badCount;
+
+            // 카테고리별 뱃지 업데이트
+            for (let cat in catStats) {
+                document.getElementById(`cat-progress-${cat}`).innerText = `${catStats[cat].checked} / ${catStats[cat].total} 완료`;
+            }
+        }
+
+        // 점검 결과를 변경할 때 호출되는 핸들러
+        function setScore(itemId, scoreValue) {
+            // 이미 동일한 값이면 해제 처리
+            if (userState.scores[itemId] === scoreValue) {
+                delete userState.scores[itemId];
+            } else {
+                userState.scores[itemId] = scoreValue;
+            }
+            saveState();
+            renderList();
+            showToast("점검 데이터가 저장되었습니다.");
+        }
+
+        // 조치 메모 입력 시 호출되는 핸들러
+        function setMemo(itemId, val) {
+            userState.memos[itemId] = val;
+            saveState();
+        }
+
+        // 토스트 팝업 메시지 출력
+        function showToast(msg) {
+            const toast = document.getElementById('toast-message');
+            document.getElementById('toast-text').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 1800);
+        }
+
+        // 필터링 변수
+        let currentFilter = 'all'; // 'all' | 'bad'
+        function filterItems(type) {
+            currentFilter = type;
+            const btnAll = document.getElementById('btn-filter-all');
+            const btnBad = document.getElementById('btn-filter-bad');
+
+            if (type === 'all') {
+                btnAll.className = "px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-white transition-colors";
+                btnBad.className = "px-3 py-1.5 rounded-lg text-xs font-semibold bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors flex items-center space-x-1";
+            } else {
+                btnAll.className = "px-3 py-1.5 rounded-lg text-xs font-semibold bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 transition-colors";
+                btnBad.className = "px-3 py-1.5 rounded-lg text-xs font-semibold bg-rose-600 text-white transition-colors flex items-center space-x-1";
+            }
+            renderList();
+        }
+
+        // 테이블 리스트 렌더링 함수
+        function renderList() {
+            const cats = ['general', 'surroundings', 'drainage'];
+            
+            cats.forEach(cat => {
+                const container = document.getElementById(`list-${cat}`);
+                container.innerHTML = '';
+                
+                const filtered = checklistItems.filter(item => {
+                    if (item.category !== cat) return false;
+                    if (currentFilter === 'bad') {
+                        return userState.scores[item.id] === 'bad';
+                    }
+                    return true;
+                });
+
+                if (filtered.length === 0) {
+                    container.innerHTML = `
+                        <div class="py-10 text-center text-sm text-slate-400">
+                            <i data-lucide="info" class="w-8 h-8 mx-auto mb-2 text-slate-300"></i>
+                            이 카테고리에서 표시할 점검 항목이 없습니다.
+                        </div>
+                    `;
+                    lucide.createIcons();
+                    return;
+                }
+
+                filtered.forEach((item, index) => {
+                    const currentScore = userState.scores[item.id] || null;
+                    const currentMemo = userState.memos[item.id] || '';
+
+                    // 점검 결과별 클래스 지정
+                    const isGood = currentScore === 'good';
+                    const isBad = currentScore === 'bad';
+                    const isNone = currentScore === 'none';
+
+                    const itemHtml = `
+                        <div class="p-6 transition-colors hover:bg-slate-50/50 flex flex-col lg:flex-row lg:items-center justify-between gap-6" id="card-${item.id}">
+                            <!-- 왼쪽 질문정보 -->
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-xs font-bold text-slate-400">#${index + 1}</span>
+                                    <h4 class="font-bold text-slate-900 text-sm md:text-base">${item.title}</h4>
+                                </div>
+                                <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">${item.desc}</p>
+                            </div>
+
+                            <!-- 오른쪽 점검 체크버튼 및 비고/메모란 -->
+                            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                                <!-- 버튼 제어 -->
+                                <div class="flex rounded-lg border border-slate-200 bg-white p-0.5 shadow-sm no-print self-start sm:self-auto">
+                                    <button onclick="setScore('${item.id}', 'good')" class="px-3.5 py-1.5 rounded-md text-xs font-semibold transition-all duration-200 flex items-center space-x-1 ${isGood ? 'bg-emerald-500 text-white shadow' : 'text-slate-500 hover:text-slate-800'}" title="이상없음">
+                                        <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                                        <span>양호</span>
+                                    </button>
+                                    <button onclick="setScore('${item.id}', 'bad')" class="px-3.5 py-1.5 rounded-md text-xs font-semibold transition-all duration-200 flex items-center space-x-1 ${isBad ? 'bg-rose-500 text-white shadow' : 'text-slate-500 hover:text-slate-800'}" title="불량 / 즉각조치">
+                                        <i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i>
+                                        <span>불량</span>
+                                    </button>
+                                    <button onclick="setScore('${item.id}', 'none')" class="px-3.5 py-1.5 rounded-md text-xs font-semibold transition-all duration-200 flex items-center space-x-1 ${isNone ? 'bg-slate-400 text-white shadow' : 'text-slate-400 hover:text-slate-800'}" title="해당 시설물 없음">
+                                        <span>해당없음</span>
+                                    </button>
+                                </div>
+
+                                <!-- 인쇄용 스코어 출력 요소 (웹 화면에선 숨김) -->
+                                <div class="hidden print:block font-bold text-sm min-w-[70px] text-center">
+                                    ${isGood ? '<span class="text-emerald-600">[ 양호 ]</span>' : ''}
+                                    ${isBad ? '<span class="text-rose-600">[ 불량 ]</span>' : ''}
+                                    ${isNone ? '<span class="text-slate-400">[ 해당없음 ]</span>' : ''}
+                                    ${!currentScore ? '<span class="text-red-500">[ 미점검 ]</span>' : ''}
+                                </div>
+
+                                <!-- 조치 사항 기술란 -->
+                                <div class="w-full sm:w-64">
+                                    <input type="text" 
+                                           oninput="setMemo('${item.id}', this.value)" 
+                                           placeholder="점검 특이사항 및 현장조치 계획 입력" 
+                                           value="${currentMemo}" 
+                                           class="w-full text-xs border border-slate-200 rounded-lg px-3 py-2 bg-slate-50 focus:outline-none focus:border-amber-500 focus:bg-white placeholder-slate-400 text-slate-700 transition-all duration-150">
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.insertAdjacentHTML('beforeend', itemHtml);
+                });
+            });
+
+            lucide.createIcons();
+        }
+
+        // 전체 체크리스트 초기화 기능
+        function resetChecklist() {
+            if (confirm("정말로 모든 체크리스트 상태와 작성된 사항을 전부 초기화하시겠습니까?")) {
+                userState.scores = {};
+                userState.memos = {};
+                saveState();
+                renderList();
+                showToast("점검 데이터가 완전히 리셋되었습니다.");
+            }
+        }
+
+        // 초기 시작 로드
+        window.onload = function() {
+            // 날짜 자동 기본값 입력
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('check-date').value = today;
+
+            loadState();
+            updateDashboard();
+            renderList();
+            updateLastSavedTime();
+        }
+    </script>
+
+</body>
+</html>

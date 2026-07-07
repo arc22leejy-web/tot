@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>토공사(지하 굴착) 일일 안전 체크리스트</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; }
+        
+        /* 체크박스 커스텀 애니메이션 */
+        .checkbox-wrapper input:checked + div {
+            background-color: #22c55e; /* green-500 */
+            border-color: #22c55e;
+        }
+        .checkbox-wrapper input:checked + div svg {
+            display: block;
+        }
+        
+        .progress-transition {
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen py-8 px-4 sm:px-6 lg:px-8 selection:bg-yellow-200">
+
+    <div class="max-w-4xl mx-auto">
+        <!-- Header Section -->
+        <header class="bg-white rounded-t-2xl shadow-sm border-b-4 border-yellow-400 p-6 sm:p-8 relative overflow-hidden">
+            <!-- Background pattern decoration -->
+            <div class="absolute -top-10 -right-10 text-slate-50 opacity-20">
+                <i class="fa-solid fa-helmet-safety text-9xl"></i>
+            </div>
+            
+            <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div>
+                    <span class="inline-block px-3 py-1 bg-yellow-100 text-yellow-800 font-bold text-xs rounded-full mb-3">
+                        <i class="fa-solid fa-triangle-exclamation mr-1"></i> 현장 필수 점검
+                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">토공사(지하 굴착) 일일 안전 체크리스트</h1>
+                    <p class="text-slate-500 mt-2 text-sm sm:text-base">붕괴 등 대형 사고를 예방하기 위해 작업 전 관리자가 반드시 확인해야 할 10대 수칙입니다.</p>
+                </div>
+                
+                <!-- Progress Circular/Text Info -->
+                <div class="bg-slate-50 rounded-xl p-4 border border-slate-100 min-w-[160px] text-center shadow-inner">
+                    <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">점검 진행률</p>
+                    <div class="flex items-end justify-center gap-1">
+                        <span id="checked-count" class="text-3xl font-black text-blue-600">0</span>
+                        <span class="text-lg font-bold text-slate-400 mb-1">/ 10</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="mt-8">
+                <div class="flex justify-between text-xs font-bold mb-1">
+                    <span class="text-slate-500">진행도</span>
+                    <span id="progress-text" class="text-blue-600">0%</span>
+                </div>
+                <div class="w-full bg-slate-200 rounded-full h-3 overflow-hidden">
+                    <div id="progress-bar" class="bg-blue-600 h-3 rounded-full progress-transition" style="width: 0%"></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Checklist Section -->
+        <main class="bg-white rounded-b-2xl shadow-xl p-6 sm:p-8 mb-8 space-y-10">
+            
+            <!-- Category 1 -->
+            <section>
+                <h2 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2 border-b-2 border-slate-100 pb-2">
+                    <span class="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center text-sm"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    1. 사전 조사 및 매설물 점검
+                </h2>
+                <div class="space-y-3 pl-2 sm:pl-10">
+                    <!-- Item 1 -->
+                    <label class="checkbox-wrapper group flex items-start cursor-pointer p-3 rounded-xl hover:bg-slate-50 transition border border-transparent hover:border-slate-200">
+                        <input type="checkbox" class="checklist-item sr-only peer">
+                        <div class="w-6 h-6 border-2 border-slate-300 rounded flex-shrink-0 flex items-center justify-center mr-4 mt-0.5 transition-colors peer-focus:ring-2 peer-focus:ring-blue-500">
+                            <svg class="w-4 h-4 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <div class="flex-1 peer-checked:opacity-50 transition-opacity">
+                            <p class="font-bold text-slate-800 text-base peer-checked:line-through decoration-slate-400">지하 매설물 100% 파악</p>
+                            <p class="text-sm text-slate-500 mt-1">굴착 지점 아래에 도시가스관, 특고압 전력선, 광케이블, 상수도관이 지나가지 않는지 도면 대조 및 GPR(지표투과레이더) 탐사를 완료했는가?</p>
+                        </div>
+                    </label>
+                    <!-- Item 2 -->
+                    <label class="checkbox-wrapper group flex items-start cursor-pointer p-3 rounded-xl hover:bg-slate-50 transition border border-transparent hover:border-slate-200">
+                        <input type="checkbox" class="checklist-item sr-only peer">
+                        <div class="w-6 h-6 border-2 border-slate-300 rounded flex-shrink-0 flex items-center justify-center mr-4 mt-0.5 transition-colors peer-focus:ring-2 peer-focus:ring-blue-500">
+                            <svg class="w-4 h-4 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <div class="flex-1 peer-checked:opacity-50 transition-opacity">
+                            <p class="font-bold text-slate-800 text-base peer-checked:line-through decoration-slate-400">주변 건물 상태 및 계측기 모니터링</p>
+                            <p class="text-sm text-slate-500 mt-1">터파기 진동으로 인접 건물에 크랙이 가거나 지반이 침하하는 것을 막기 위해, 경사계·지하수위계 등 '지반 계측기'를 설치하고 매일 데이터를 확인하는가?</p>
+                        </div>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Category 2 -->
+            <section>
+                <h2 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2 border-b-2 border-slate-100 pb-2">
+                    <span class="w-8 h-8 rounded-lg bg-orange-100 text-orange-600 flex items-center justify-center text-sm"><i class="fa-solid fa-layer-group"></i></span>
+                    2. 흙막이(가시설) 및 붕괴 방지
+                </h2>
+                <div class="space-y-3 pl-2 sm:pl-10">
+                    <!-- Item 3 -->
+                    <label class="checkbox-wrapper group flex items-start cursor-pointer p-3 rounded-xl hover:bg-slate-50 transition border border-transparent hover:border-slate-200">
+                        <input type="checkbox" class="checklist-item sr-only peer">
+                        <div class="w-6 h-6 border-2 border-slate-300 rounded flex-shrink-0 flex items-center justify-center mr-4 mt-0.5 transition-colors peer-focus:ring-2 peer-focus:ring-blue-500">
+                            <svg class="w-4 h-4 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <div class="flex-1 peer-checked:opacity-50 transition-opacity">
+                            <p class="font-bold text-slate-800 text-base peer-checked:line-through decoration-slate-400">흙막이 지보공 조립 상태 검토</p>
+                            <p class="text-sm text-slate-500 mt-1">흙이 쏟아지는 것을 막는 H빔, 어스앵커, 띠장(Wale), 버팀대(Strut) 등 가설 구조물이 설계 도면의 규격과 각도대로 단단히 용접 및 볼트 체결되었는가?</p>
+                        </div>
+                    </label>
+                    <!-- Item 4 -->
+                    <label class="checkbox-wrapper group flex items-start cursor-pointer p-3 rounded-xl hover:bg-slate-50 transition border border-transparent hover:border-slate-200">
+                        <input type="checkbox" class="checklist-item sr-only peer">
+                        <div class="w-6 h-6 border-2 border-slate-300 rounded flex-shrink-0 flex items-center justify-center mr-4 mt-0.5 transition-colors peer-focus:ring-2 peer-focus:ring-blue-500">
+                            <svg class="w-4 h-4 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <div class="flex-1 peer-checked:opacity-50 transition-opacity">
+                            <p class="font-bold text-slate-800 text-base peer-checked:line-through decoration-slate-400">안전 기울기(안식각) 확보</p>
+                            <p class="text-sm text-slate-500 mt-1">흙막이 없이 굴착하는 구간의 경우, 토질(모래, 진흙, 암반 등)의 점착력에 맞춰 흙이 스스로 무너지지 않는 안전한 비탈면 기울기를 유지하며 파 내려가는가?</p>
+                        </div>
+                    </label>
+                    <!-- Item 5 -->
+                    <label class="checkbox-wrapper group flex items-start cursor-pointer p-3 rounded-xl hover:bg-slate-50 transition border border-transparent hover:border-slate-200">
+                        <input type="checkbox" class="checklist-item sr-only peer">
+                        <div class="w-6 h-6 border-2 border-slate-300 rounded flex-shrink-0 flex items-center justify-center mr-4 mt-0.5 transition-colors peer-focus:ring-2 peer-focus:ring-blue-500">
+                            <svg class="w-4 h-4 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <div class="flex-1 peer-checked:opacity-50 transition-opacity">
+                            <p class="font-bold text-slate-800 text-base peer-checked:line-through decoration-slate-400">지하수위 및 배수 통제</p>
+                            <p class="text-sm text-slate-500 mt-1">굴착 중 솟아나는 지하수나 집중호우 시 빗물이 고이지 않도록 양수기(배수 펌프)가 정상 가동되며, 흙막이 벽체 뒤로 미세 토사가 유실되어 동공(싱크홀)이 발생하지 않는가?</p>
+                        </div>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Category 3 -->
+            <section>
+                <h2 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2 border-b-2 border-slate-100 pb-2">
+                    <span class="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center text-sm"><i class="fa-solid fa-truck-monster"></i></span>
+                    3. 중장비 및 교통 통제
+                </h2>
+                <div class="space-y-3 pl-2 sm:pl-10">
+                    <!-- Item 6 -->
+                    <label class="checkbox-wrapper group flex items-start cursor-pointer p-3 rounded-xl hover:bg-slate-50 transition border border-transparent hover:border-slate-200">
+                        <input type="checkbox" class="checklist-item sr-only peer">
+                        <div class="w-6 h-6 border-2 border-slate-300 rounded flex-shrink-0 flex items-center justify-center mr-4 mt-0.5 transition-colors peer-focus:ring-2 peer-focus:ring-blue-500">
+                            <svg class="w-4 h-4 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <div class="flex-1 peer-checked:opacity-50 transition-opacity">
+                            <p class="font-bold text-slate-800 text-base peer-checked:line-through decoration-slate-400">작업 반경 내 철저한 접근 금지</p>
+                            <p class="text-sm text-slate-500 mt-1">굴착기(포크레인)가 붐을 뻗고 회전하는 반경 내에 근로자가 절대 들어갈 수 없도록 통제선을 치고, 장비마다 전담 '신호수'를 배치했는가?</p>
+                        </div>
+                    </label>
+                    <!-- Item 7 -->
+                    <label class="checkbox-wrapper group flex items-start cursor-pointer p-3 rounded-xl hover:bg-slate-50 transition border border-transparent hover:border-slate-200">
+                        <input type="checkbox" class="checklist-item sr-only peer">
+                        <div class="w-6 h-6 border-2 border-slate-300 rounded flex-shrink-0 flex items-center justify-center mr-4 mt-0.5 transition-colors peer-focus:ring-2 peer-focus:ring-blue-500">
+                            <svg class="w-4 h-4 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <div class="flex-1 peer-checked:opacity-50 transition-opacity">
+                            <p class="font-bold text-slate-800 text-base peer-checked:line-through decoration-slate-400">중장비 전도(넘어짐) 방지</p>
+                            <p class="text-sm text-slate-500 mt-1">굴착기나 항타기가 작업하는 끝단 바닥이 하중을 못 이기고 무너져 내리지 않도록, 지반 평탄화 및 다짐 작업을 거치고 필요시 복공판(철판)을 깔았는가?</p>
+                        </div>
+                    </label>
+                    <!-- Item 8 -->
+                    <label class="checkbox-wrapper group flex items-start cursor-pointer p-3 rounded-xl hover:bg-slate-50 transition border border-transparent hover:border-slate-200">
+                        <input type="checkbox" class="checklist-item sr-only peer">
+                        <div class="w-6 h-6 border-2 border-slate-300 rounded flex-shrink-0 flex items-center justify-center mr-4 mt-0.5 transition-colors peer-focus:ring-2 peer-focus:ring-blue-500">
+                            <svg class="w-4 h-4 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <div class="flex-1 peer-checked:opacity-50 transition-opacity">
+                            <p class="font-bold text-slate-800 text-base peer-checked:line-through decoration-slate-400">덤프트럭 진출입로 및 세륜기 안전</p>
+                            <p class="text-sm text-slate-500 mt-1">파낸 흙을 반출하는 대형 덤프트럭의 동선에 사각지대가 없는지, 세륜기(바퀴 씻는 곳) 주변이 진흙으로 미끄럽지 않은지 전담 유도자가 통제하는가?</p>
+                        </div>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Category 4 -->
+            <section>
+                <h2 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2 border-b-2 border-slate-100 pb-2">
+                    <span class="w-8 h-8 rounded-lg bg-red-100 text-red-600 flex items-center justify-center text-sm"><i class="fa-solid fa-person-falling-burst"></i></span>
+                    4. 작업자 직접 위험 차단
+                </h2>
+                <div class="space-y-3 pl-2 sm:pl-10">
+                    <!-- Item 9 -->
+                    <label class="checkbox-wrapper group flex items-start cursor-pointer p-3 rounded-xl hover:bg-slate-50 transition border border-transparent hover:border-slate-200">
+                        <input type="checkbox" class="checklist-item sr-only peer">
+                        <div class="w-6 h-6 border-2 border-slate-300 rounded flex-shrink-0 flex items-center justify-center mr-4 mt-0.5 transition-colors peer-focus:ring-2 peer-focus:ring-blue-500">
+                            <svg class="w-4 h-4 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <div class="flex-1 peer-checked:opacity-50 transition-opacity">
+                            <p class="font-bold text-slate-800 text-base peer-checked:line-through decoration-slate-400">굴착 단부(가장자리) 추락 방지</p>
+                            <p class="text-sm text-slate-500 mt-1">수 미터 깊이로 파인 구덩이 가장자리를 따라 튼튼한 임시 안전 난간대(높이 90~120cm)와 추락 방지망이 틈새 없이 설치되어 있는가?</p>
+                        </div>
+                    </label>
+                    <!-- Item 10 -->
+                    <label class="checkbox-wrapper group flex items-start cursor-pointer p-3 rounded-xl hover:bg-slate-50 transition border border-transparent hover:border-slate-200">
+                        <input type="checkbox" class="checklist-item sr-only peer">
+                        <div class="w-6 h-6 border-2 border-slate-300 rounded flex-shrink-0 flex items-center justify-center mr-4 mt-0.5 transition-colors peer-focus:ring-2 peer-focus:ring-blue-500">
+                            <svg class="w-4 h-4 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <div class="flex-1 peer-checked:opacity-50 transition-opacity">
+                            <p class="font-bold text-slate-800 text-base peer-checked:line-through decoration-slate-400">피난 동선 및 환기(질식 방지)</p>
+                            <p class="text-sm text-slate-500 mt-1">깊은 지하 바닥에서 일하는 근로자가 토사 붕괴 조짐 시 즉각 지상으로 탈출할 수 있는 가설 계단(승강 설비)이 확보되어 있고, 굴착기 매연이나 지하 유해가스가 정체되지 않도록 환기(송풍)를 실시하는가?</p>
+                        </div>
+                    </label>
+                </div>
+            </section>
+            
+            <!-- Action Buttons -->
+            <div class="pt-6 mt-8 border-t border-slate-200 flex flex-col sm:flex-row justify-end gap-3">
+                <button id="reset-btn" class="px-5 py-2.5 bg-slate-100 text-slate-700 font-bold rounded-lg hover:bg-slate-200 transition flex justify-center items-center gap-2">
+                    <i class="fa-solid fa-rotate-right"></i> 초기화
+                </button>
+                <button id="submit-btn" class="px-6 py-2.5 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition flex justify-center items-center gap-2 shadow-md disabled:opacity-50 disabled:cursor-not-allowed">
+                    <i class="fa-solid fa-check-double"></i> 점검 완료 보고
+                </button>
+            </div>
+        </main>
+        
+        <p class="text-center text-slate-400 text-sm pb-8">
+            <i class="fa-solid fa-shield-halved mr-1"></i> 안전은 타협할 수 없는 최고의 가치입니다.
+        </p>
+    </div>
+
+    <!-- JavaScript for functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const checkboxes = document.querySelectorAll('.checklist-item');
+            const checkedCountEl = document.getElementById('checked-count');
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            const resetBtn = document.getElementById('reset-btn');
+            const submitBtn = document.getElementById('submit-btn');
+            const totalItems = checkboxes.length;
+
+            // 진행 상태 업데이트 함수
+            const updateProgress = () => {
+                const checkedItems = document.querySelectorAll('.checklist-item:checked').length;
+                const percentage = Math.round((checkedItems / totalItems) * 100);
+
+                // UI 업데이트
+                checkedCountEl.textContent = checkedItems;
+                progressBar.style.width = `${percentage}%`;
+                progressText.textContent = `${percentage}%`;
+
+                // 색상 변경 (완료 시 녹색)
+                if (percentage === 100) {
+                    progressBar.classList.remove('bg-blue-600');
+                    progressBar.classList.add('bg-green-500');
+                    progressText.classList.remove('text-blue-600');
+                    progressText.classList.add('text-green-500');
+                    submitBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+                    submitBtn.classList.add('bg-green-500', 'hover:bg-green-600');
+                } else {
+                    progressBar.classList.add('bg-blue-600');
+                    progressBar.classList.remove('bg-green-500');
+                    progressText.classList.add('text-blue-600');
+                    progressText.classList.remove('text-green-500');
+                    submitBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                    submitBtn.classList.remove('bg-green-500', 'hover:bg-green-600');
+                }
+            };
+
+            // 각 체크박스에 이벤트 리스너 추가
+            checkboxes.forEach(box => {
+                box.addEventListener('change', updateProgress);
+            });
+
+            // 초기화 버튼 이벤트
+            resetBtn.addEventListener('click', () => {
+                if (confirm('모든 점검 내역을 초기화하시겠습니까?')) {
+                    checkboxes.forEach(box => box.checked = false);
+                    updateProgress();
+                }
+            });
+
+            // 점검 완료 버튼 이벤트
+            submitBtn.addEventListener('click', () => {
+                const checkedItems = document.querySelectorAll('.checklist-item:checked').length;
+                if (checkedItems === totalItems) {
+                    alert('수고하셨습니다. 일일 안전 점검이 완벽하게 완료되었습니다.');
+                } else {
+                    alert(`아직 점검되지 않은 항목이 ${totalItems - checkedItems}개 있습니다. 모든 항목을 확인해 주세요.`);
+                }
+            });
+
+            // 초기 상태 렌더링
+            updateProgress();
+        });
+    </script>
+</body>
+</html>
